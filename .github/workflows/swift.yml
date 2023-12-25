@@ -1,19 +1,12 @@
-name: Build My App #1
-
-on: #2
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs: #3
-  build:
-
-    runs-on: macos-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+name: Swift
+on:
+pull_request:
+branches: [ "dev" ]
+jobs:
+build:
+name: Build app
+runs-on: macos-latest
+steps:
+- uses: actions/checkout@v3
+- name: Build
+run: exec ./.github/build.sh
