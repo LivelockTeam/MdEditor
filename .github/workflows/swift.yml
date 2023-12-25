@@ -7,7 +7,7 @@ pull_request:
 branches: [ "main" ]
 jobs:
 build:
-name: Build app
+name: MdEditor
 runs-on: macos-latest
 steps:
 - uses: actions/checkout@v3
