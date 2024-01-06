@@ -1,13 +1,15 @@
 //
 //  SceneDelegate.swift
+//  MdEditor
+//
+//  Created by Sergey Rumyantsev on 05.01.2024.
+//
 
 import UIKit
-
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
-
 
 	func scene(
 		_ scene: UIScene,
@@ -17,12 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: scene)
 
-		let navigationController = UINavigationController()
+		window.rootViewController = ViewController()
+		window.makeKeyAndVisible()
 
 		self.window = window
-	}
-
-	func handleDeeplink(url: URL) {
-
 	}
 }

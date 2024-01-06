@@ -1,8 +1,11 @@
 //
 //  AppDelegate.swift
+//  MdEditor
+//
+//  Created by Sergey Rumyantsev on 05.01.2024.
+//
 
 import UIKit
-
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,5 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		options: UIScene.ConnectionOptions
 	) -> UISceneConfiguration {
 		return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+	}
+
+	func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
 	}
 }

@@ -1,3 +1,4 @@
+# https://bitbucket.app.local/projects/ITD/repos/swift-style-guide/browse/swiftlint.yml
 # https://github.com/realm/SwiftLint
 # список правил, которые необходимо включить (по умолчанию отключены)
 opt_in_rules:
@@ -35,13 +36,9 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
 
-# отключенные правила
-disabled_rules:
-  - trailing_whitespace
-
 # путь к исходникам для проверки кода
 included:
-  - MdEditor
+  - Sources
 
 # подкаталоги, в которых линтер не будет делать проверку кода
 excluded:

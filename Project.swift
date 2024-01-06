@@ -4,8 +4,20 @@ public var scripts: [TargetScript] {
 
 	var scripts = [TargetScript]()
 
-	let swiftLintScriptString = "SwiftLint/swiftlint --fix && SwiftLint/swiftlint"
-	let swiftLintScript = TargetScript.post(script: swiftLintScriptString, name: "SwiftLint")
+	let swiftLintScriptString = """
+								export PATH="$PATH:/opt/homebrew/bin"
+								if which swiftlint > /dev/null; then
+									swiftlint
+								else
+									echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+									exit 1
+								fi
+								"""
+	let swiftLintScript = TargetScript.post(
+		script: swiftLintScriptString,
+		name: "SwiftLint",
+		basedOnDependencyAnalysis: false
+	)
 
 	scripts.append(swiftLintScript)
 	return scripts
@@ -13,20 +25,18 @@ public var scripts: [TargetScript] {
 
 let project = Project(
 	name: "MdEditor",
-	organizationName: "LiveLock team",
+	organizationName: "LivelockTeam",
 	targets: [
 		Target(
 			name: "MdEditor",
-			platform: .iOS,
+			destinations: .iOS,
 			product: .app,
-			bundleId: "ru.LiveLock.MdEditor",
-			infoPlist: .default,
+			bundleId: "ru.LivelockTeam.MdEditor",
+			infoPlist: "Info.plist",
 			sources: ["Sources/**"],
 			resources: ["Resources/**"],
 			scripts: scripts,
 			dependencies: [
-				/* Target dependencies can be defined here */
-				/* .framework(path: "framework") */
 			]
 		)
 	]

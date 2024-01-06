@@ -1,7 +1,6 @@
 import ProjectDescription
 
 let config = Config(
-    plugins: [
-        .local(path: .relativeToManifest("../../Plugins/MdEditor")),
-    ]
+	compatibleXcodeVersions: ["15.0.1"],
+	swiftVersion: "5.9"
 )

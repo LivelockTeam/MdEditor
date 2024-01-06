@@ -1,14 +1,11 @@
 name: Swift
-
 on:
   pull_request:
-    branches: [ "main" ]
-
+    branches: [ "mdeditor-my-beta-version" ]
 jobs:
   build:
-    name: Build app
+    name: Build App
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build
-        run: exec ./.github/build.sh
+      - run: exec ./.github/build.sh
