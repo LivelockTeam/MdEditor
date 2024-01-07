@@ -1,11 +1,13 @@
-name: Swift
-on:
-  pull_request:
-    branches: [ "mdeditor-my-beta-version" ]
+name: Build App
+on: workflow_dispatch
 jobs:
-  build:
-    name: Build App
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: exec ./.github/build.sh
+    build:
+      runs-on: macos-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Make the script files executable
+          run: 
+            chmod +x ./.github/build.sh
+        - name: Run script
+          run: 
+            ./.github/build.sh
