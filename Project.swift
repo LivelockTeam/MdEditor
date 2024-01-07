@@ -26,6 +26,10 @@ public var scripts: [TargetScript] {
 let project = Project(
 	name: "MdEditor",
 	organizationName: "LivelockTeam",
+	packages: [
+		.package(path: "Packages/TaskManagerPackage"),
+		.package(path: "Packages/DataStructuresPackage")
+	],
 	targets: [
 		Target(
 			name: "MdEditor",
@@ -37,6 +41,8 @@ let project = Project(
 			resources: ["Resources/**"],
 			scripts: scripts,
 			dependencies: [
+				.package(product: "TaskManagerPackage"),
+				.package(product: "DataStructuresPackage")
 			]
 		)
 	]
