@@ -2,8 +2,6 @@
 //  AppDelegate.swift
 //  MdEditor
 //
-//  Created by Sergey Rumyantsev on 05.01.2024.
-//
 
 import UIKit
 

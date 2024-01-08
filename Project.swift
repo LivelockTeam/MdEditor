@@ -28,7 +28,7 @@ let project = Project(
 	organizationName: "LivelockTeam",
 	packages: [
 		.package(path: "Packages/TaskManagerPackage"),
-		.package(path: "Packages/DataStructuresPackage")
+		.package(path: "Packages/DataStructures")
 	],
 	targets: [
 		Target(
@@ -42,7 +42,7 @@ let project = Project(
 			scripts: scripts,
 			dependencies: [
 				.package(product: "TaskManagerPackage"),
-				.package(product: "DataStructuresPackage")
+				.package(product: "DataStructures")
 			]
 		)
 	]
