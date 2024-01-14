@@ -4,10 +4,12 @@
 //
 
 import UIKit
+import TaskManagerPackage
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
+	private var appCoordinator: ICoordinator! // swiftlint:disable:this implicitly_unwrapped_optional
 
 	func scene(
 		_ scene: UIScene,
@@ -17,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: scene)
 
-		window.rootViewController = ViewController()
-		window.makeKeyAndVisible()
+		appCoordinator = AppCoordinator(window: window)
+		appCoordinator.start()
 
 		self.window = window
 	}
