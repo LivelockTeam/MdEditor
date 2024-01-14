@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  MdEditor
+
+  Created by Иван Лясковец on 14.01.2024.
+  Copyright © 2024 LivelockTeam. All rights reserved.
+*/
+
+"Login.title" = "Авторизация";
+"Login.tfLoginPlaceholder" = "Логин";
+"Login.tfPasswordPlaceholder" = "Пароль";
+"Login.btnLoginText" = "Войти";
+
+"TodoList.title" = "Cписок дел";
+"TodoList.deadline" = "Дедлайн";
+"TodoList.Completed" = "Завершенные";
+"TodoList.Uncompleted" = "Незавершенные";
+"TodoList.All" = "Все";
+"TodoList.Important" = "Важные";
+"TodoList.Regular" = "Обычные";
