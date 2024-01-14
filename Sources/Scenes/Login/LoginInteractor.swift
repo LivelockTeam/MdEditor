@@ -7,15 +7,10 @@
 
 import Foundation
 
-/// Протокол Interactor в сцене Login
 protocol ILoginInteractor {
-
-	/// Метод реализующий запрос View к Interractor в сцене Login
-	/// - Parameter request: Структура запроса View к Interractor в сцене Login
 	func login(request: LoginModel.Request)
 }
 
-/// Интерактор сцены Login
 final class LoginInteractor: ILoginInteractor {
 
 	// MARK: - Dependencies
@@ -32,8 +27,6 @@ final class LoginInteractor: ILoginInteractor {
 
 	// MARK: - Public methods
 
-	/// Метод реализующий запрос View к Interractor в сцене Login
-	/// - Parameter request: Структура запроса View к Interractor в сцене Login
 	func login(request: LoginModel.Request) {
 		let result = worker.login(login: request.login, password: request.password)
 		let responce = LoginModel.Response(result: result)

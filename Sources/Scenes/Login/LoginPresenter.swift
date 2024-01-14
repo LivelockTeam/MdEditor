@@ -7,34 +7,33 @@
 
 import Foundation
 
-/// Typealias замыкания, через которое передаётся результат работы VIP цикла сцены Login в Coordinator
-typealias LoginResultClosure = (Result<Void, LoginError>) -> Void
-
-/// Протокол Presenter в сцене Login
 protocol ILoginPresenter {
 
-	/// Метод обрабатывающий ответ Interractor для Presenter в сцене Login
-	/// - Parameter responce: Структура ответа Interractor для Presenter в сцене Login
+	/// Отображение экрана со авторизации.
+	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: LoginModel.Response)
 }
 
-/// Презентер сцены Login
+typealias LoginResultClosure = (Result<Void, LoginError>) -> Void
+
 final class LoginPresenter: ILoginPresenter {
 
 	// MARK: - Dependencies
 
+	private weak var viewController: ILoginViewController?
 	private var loginResultClosure: LoginResultClosure?
 
 	// MARK: - Initialization
 
-	init(loginResultClosure: LoginResultClosure?) {
+	init(viewController: ILoginViewController?, loginResultClosure: LoginResultClosure?) {
+		self.viewController = viewController
 		self.loginResultClosure = loginResultClosure
 	}
 
 	// MARK: - Public methods
 
-	/// Метод обрабатывающий ответ Interractor для Presenter в сцене Login
-	/// - Parameter responce: Структура ответа Interractor для Presenter в сцене Login
+	/// Отображение экрана со авторизации.
+	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: LoginModel.Response) {
 		loginResultClosure?(responce.result)
 	}

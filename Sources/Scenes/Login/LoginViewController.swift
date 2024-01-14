@@ -7,7 +7,8 @@
 
 import UIKit
 
-/// Экран Login
+protocol ILoginViewController: AnyObject {}
+
 final class LoginViewController: UIViewController {
 
 	// MARK: - Dependencies
@@ -141,3 +142,7 @@ private extension LoginViewController {
 		return view.bounds.size.height / 3.0
 	}
 }
+
+// MARK: - ILoginViewController
+
+extension LoginViewController: ILoginViewController {}

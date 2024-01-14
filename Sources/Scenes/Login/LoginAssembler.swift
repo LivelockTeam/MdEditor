@@ -7,14 +7,15 @@
 
 import UIKit
 
-/// Сборщик сцены Login
 final class LoginAssembler {
 
-	/// Метод сборки сцены Login
+	/// Сборка модуля авторизации
+	/// - Parameter loginResultClosure: замыкание оповещающие о результате авторизации
+	/// - Returns: вью
 	func assembly(loginResultClosure: LoginResultClosure?) -> LoginViewController {
 		let viewController = LoginViewController()
-		let presenter = LoginPresenter(loginResultClosure: loginResultClosure)
-		let worker = LoginWorker()
+		let presenter = LoginPresenter(viewController: viewController, loginResultClosure: loginResultClosure)
+		let worker = StubLoginWorker()
 		let interactor = LoginInteractor(presenter: presenter, worker: worker)
 		viewController.interactor = interactor
 

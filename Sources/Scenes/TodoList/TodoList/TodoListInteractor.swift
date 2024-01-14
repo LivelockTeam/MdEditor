@@ -17,7 +17,6 @@ protocol ITodoListInteractor {
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected)
 }
 
-/// Интерактор сцены TodoList
 final class TodoListInteractor: ITodoListInteractor {
 
 	// MARK: - Dependencies
@@ -27,17 +26,14 @@ final class TodoListInteractor: ITodoListInteractor {
 
 	// MARK: - Initialization
 
-	init(
-		presenter: ITodoListPresenter,
-		sectionManager: ISectionForTaskManagerAdapter
-	) {
+	init(presenter: ITodoListPresenter, sectionManager: ISectionForTaskManagerAdapter) {
 		self.presenter = presenter
 		self.sectionManager = sectionManager
 	}
 
 	// MARK: - Public methods
 
-	/// Обработка данных запроса от View и формирование ответа для Presenter сцены TodoList
+	/// Событие на предоставление информации для списка заданий.
 	func fetchData() {
 		var responseData = [TodoListModel.Response.SectionWithTasks]()
 
@@ -53,7 +49,8 @@ final class TodoListInteractor: ITodoListInteractor {
 		presenter.present(response: response)
 	}
 
-	/// Обработка сценария выбора задачи в списке задач сцены TodoList
+	/// Событие, что задание было выбрано.
+	/// - Parameter request: Запрос, содержащий информацию о выбранном задании.
 	func didTaskSelected(request: TodoListModel.Request.TaskSelected) {
 		let section = sectionManager.getSection(forIndex: request.indexPath.section)
 		let task = sectionManager.getTasksForSection(section: section)[request.indexPath.row]

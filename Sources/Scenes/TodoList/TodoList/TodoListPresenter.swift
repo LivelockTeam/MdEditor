@@ -15,7 +15,8 @@ protocol ITodoListPresenter {
 	func present(response: TodoListModel.Response)
 }
 
-/// Презентер сцены TodoList
+typealias EmptyClosure = () -> Void
+
 final class TodoListPresenter: ITodoListPresenter {
 
 	// MARK: - Dependencies
@@ -30,7 +31,6 @@ final class TodoListPresenter: ITodoListPresenter {
 
 	// MARK: - Public methods
 
-	/// Обработка ответа от Interactor и формирование данных для отображения во View сцены TodoList
 	func present(response: TodoListModel.Response) {
 		var sections = [TodoListModel.ViewModel.Section]()
 		for sectionWithTask in response.data {

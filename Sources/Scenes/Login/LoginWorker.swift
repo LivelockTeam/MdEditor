@@ -17,9 +17,6 @@ protocol ILoginWorker {
 	func login(login: String, password: String) -> Result<Void, LoginError>
 }
 
-// Данная обработка ошибок приведена только в учебных целях!
-// Никогда на практике нельзя говорить в чем проблема при авторизации.
-// Нельзя давать подсказку про верный пароль или верный логин, так как это упрощает взлом.
 enum LoginError: Error {
 	case wrongPassword
 	case wrongLogin
@@ -27,7 +24,6 @@ enum LoginError: Error {
 	case emptyFields
 }
 
-/// Worker проверяющий валидность введённых логина и пароля
 final class LoginWorker: ILoginWorker {
 
 	// MARK: - Private properties
@@ -37,10 +33,11 @@ final class LoginWorker: ILoginWorker {
 
 	// MARK: - Public methods
 
-	/// Проверка логина и пароля на валидность
-	/// - Parameter login: введённый логин,
-	/// - Parameter password: введённый пароль.
-	/// - Returns: Результат проверки
+	/// Авторизация пользователя.
+	/// - Parameters:
+	///   - login: Логин пользователя.
+	///   - password: Пароль пользователя.
+	/// - Returns: Результат прохождения авторизации.
 	func login(login: String, password: String) -> Result<Void, LoginError> {
 		guard !login.isEmpty, !password.isEmpty else { return .failure(.emptyFields) }
 
@@ -57,7 +54,6 @@ final class LoginWorker: ILoginWorker {
 	}
 }
 
-/// StubWorker возвращающий постоянные результаты проверки (успех)
 class StubLoginWorker: ILoginWorker {
 	func login(login: String, password: String) -> Result<Void, LoginError> {
 		.success(())

@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Протокол ViewController для сцены TodoList
+/// Протокол главного экрана приложения.
 protocol ITodoListViewController: AnyObject {
 
 	/// Метод отрисовки информации на экране.
@@ -19,9 +19,11 @@ protocol ITodoListViewController: AnyObject {
 final class TodoListViewController: UITableViewController {
 
 	// MARK: - Dependencies
+
 	var interactor: ITodoListInteractor?
 
 	// MARK: - Private properties
+
 	private var viewModel = TodoListModel.ViewModel(tasksBySections: [])
 
 	// MARK: - Initialization
@@ -81,8 +83,10 @@ extension TodoListViewController {
 private extension TodoListViewController {
 
 	private func setupUI() {
+		view.backgroundColor = .white
 		title = "TodoList"
-		navigationItem.setHidesBackButton(true, animated: true)
+		navigationController?.navigationBar.prefersLargeTitles = true
+
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 	}
 

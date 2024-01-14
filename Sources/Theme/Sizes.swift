@@ -12,6 +12,7 @@ enum Sizes {
 
 	static let cornerRadius: CGFloat = 6
 	static let borderWidth: CGFloat = 1
+	static let topInset: CGFloat = 180.0
 
 	enum Padding {
 		static let half: CGFloat = 8

@@ -2,37 +2,24 @@
 //  LoginCoordinator.swift
 //  TodoList
 //
-//  Created by Sergey Rumyantsev on 06.12.2023.
-//
 
 import UIKit
 
-// MARK: - ILoginCoordinator
+protocol ILoginCoordinator: ICoordinator {
 
-/// Протокол координатора потока Login
-protocol ILoginCoordinator: ICoordinator, IShowError {
-
-	/// Ззапуск сцены Login
-	func showLoginScene()
+	/// Метод для завершении сценария
+	var finishFlow: (() -> Void)? { get set }
 }
 
-// MARK: - LoginCoordinator
-
-/// Координатор потока Login
 final class LoginCoordinator: ILoginCoordinator {
-
-	// MARK: - Public properties
-
-	/// Дочерние координаторы
-	var childCoordinator: [ICoordinator] = []
-
-	/// Делегат, уведомляемый о завершении работы
-	weak var finishDelegate: ICoordinatorFinishDelegate?
 
 	// MARK: - Dependencies
 
-	/// Контроллер обеспечения навигации
 	var navigationController: UINavigationController
+
+	// MARK: - Internal properties
+
+	var finishFlow: (() -> Void)?
 
 	// MARK: - Initialization
 
@@ -40,27 +27,28 @@ final class LoginCoordinator: ILoginCoordinator {
 		self.navigationController = navigationController
 	}
 
-	// MARK: - Public methods
+	// MARK: - Internal methods
 
-	/// Начало работы координатора
 	func start() {
 		showLoginScene()
 	}
 
-	/// Запуск сцены Login
 	func showLoginScene() {
-		let viewController = LoginAssembler().assembly(loginResultClosure: handleLoginResult)
+		let viewController = LoginAssembler().assembly { [weak self] result in
+			switch result {
+			case .success:
+				self?.finishFlow?()
+			case .failure(let error):
+				self?.showError(message: error.localizedDescription)
+			}
+		}
 		navigationController.setViewControllers([viewController], animated: true)
 	}
 
-	// MARK: - Private methods
-
-	private func handleLoginResult(_ result: Result<Void, LoginError>) {
-		switch result {
-		case .success:
-			finish()
-		case.failure(let error):
-			showError(message: error.localizedDescription)
-		}
+	func showError(message: String) {
+		let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+		let action = UIAlertAction(title: "Ок", style: .default)
+		alert.addAction(action)
+		navigationController.present(alert, animated: true, completion: nil)
 	}
 }

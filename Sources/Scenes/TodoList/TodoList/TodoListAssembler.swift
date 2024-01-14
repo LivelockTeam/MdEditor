@@ -8,7 +8,6 @@
 import UIKit
 import TaskManagerPackage
 
-/// Сборщик сцены TodoList
 final class TodoListAssembler {
 
 	// MARK: - Dependencies
@@ -17,21 +16,22 @@ final class TodoListAssembler {
 
 	// MARK: - Initialization
 
+	/// Инициализатор сборщика модуля списка заданий.
+	/// - Parameters:
+	///   - taskManager: Менеджер заданий.
 	init(taskManager: ITaskManager) {
 		self.taskManager = taskManager
 	}
 
 	// MARK: - Public methods
 
-	/// Метод сборки сцены TodoList
+	/// Сборка модуля списка заданий.
+	/// - Returns: TodoListViewController с проставленными зависимостями VIP цикла.
 	func assembly() -> TodoListViewController {
 		let viewController = TodoListViewController()
 		let sectionForTaskManagerAdapter = SectionForTaskManagerAdapter(taskManager: taskManager)
 		let presenter = TodoListPresenter(viewController: viewController)
-		let interactor = TodoListInteractor(
-			presenter: presenter,
-			sectionManager: sectionForTaskManagerAdapter
-		)
+		let interactor = TodoListInteractor(presenter: presenter, sectionManager: sectionForTaskManagerAdapter)
 		viewController.interactor = interactor
 
 		return viewController
