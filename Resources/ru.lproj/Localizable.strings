@@ -6,5 +6,10 @@
   Copyright © 2024 LivelockTeam. All rights reserved.
 */
 
-"Name" = "Имя";
-"Test" = "Тест";
+"Login.title" = "Авторизация";
+"Login.tfLoginPlaceholder" = "Логин";
+"Login.tfPasswordPlaceholder" = "Пароль";
+"Login.btnLoginText" = "Войти";
+
+"TodoList.title" = "Cписок дел";
+"TodoList.deadline" = "Дедлайн";

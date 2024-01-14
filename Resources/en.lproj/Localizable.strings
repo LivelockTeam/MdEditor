@@ -6,5 +6,10 @@
   Copyright © 2024 LivelockTeam. All rights reserved.
 */
 
-"Name" = "Name";
-"Test" = "Test";
+"Login.title" = "Authorization";
+"Login.tfLoginPlaceholder" = "Login";
+"Login.tfPasswordPlaceholder" = "Password";
+"Login.btnLoginText" = "Login";
+
+"TodoList.title" = "TodoList";
+"TodoList.deadline" = "Deadline";
