@@ -13,3 +13,8 @@
 
 "TodoList.title" = "Cписок дел";
 "TodoList.deadline" = "Дедлайн";
+"TodoList.Completed" = "Завершенные";
+"TodoList.Uncompleted" = "Незавершенные";
+"TodoList.All" = "Все";
+"TodoList.Important" = "Важные";
+"TodoList.Regular" = "Обычные";

@@ -13,3 +13,8 @@
 
 "TodoList.title" = "TodoList";
 "TodoList.deadline" = "Deadline";
+"TodoList.Completed" = "Completed";
+"TodoList.Uncompleted" = "Uncompleted";
+"TodoList.All" = "All";
+"TodoList.Important" = "Important";
+"TodoList.Regular" = "Regular";
