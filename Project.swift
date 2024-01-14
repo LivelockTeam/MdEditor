@@ -1,7 +1,12 @@
 import ProjectDescription
 
-public var scripts: [TargetScript] {
+enum ProjectSettings {
+	public static var projectName: String { "MdEditor" }
+	public static var organizationName: String { "LivelockTeam" }
+	public static var bundleId: String { "ru.LivelockTeam.MdEditor" }
+}
 
+private var scripts: [TargetScript] {
 	var scripts = [TargetScript]()
 
 	let swiftLintScriptString = """
@@ -24,18 +29,18 @@ public var scripts: [TargetScript] {
 }
 
 let project = Project(
-	name: "MdEditor",
-	organizationName: "LivelockTeam",
+	name: ProjectSettings.projectName,
+	organizationName: ProjectSettings.organizationName,
 	packages: [
 		.package(path: "Packages/TaskManagerPackage"),
 		.package(path: "Packages/DataStructures")
 	],
 	targets: [
 		Target(
-			name: "MdEditor",
+			name: ProjectSettings.projectName,
 			destinations: .iOS,
 			product: .app,
-			bundleId: "ru.LivelockTeam.MdEditor",
+			bundleId: ProjectSettings.bundleId,
 			infoPlist: "Info.plist",
 			sources: ["Sources/**"],
 			resources: ["Resources/**"],
