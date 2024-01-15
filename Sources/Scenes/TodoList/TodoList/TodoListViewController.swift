@@ -83,7 +83,7 @@ extension TodoListViewController {
 private extension TodoListViewController {
 
 	private func setupUI() {
-		view.backgroundColor = .white
+		view.backgroundColor = Colors.white
 		title = L10n.TodoList.title
 		navigationController?.navigationBar.prefersLargeTitles = true
 
@@ -99,7 +99,7 @@ private extension TodoListViewController {
 	func configureCell(_ cell: UITableViewCell, with task: TodoListModel.ViewModel.Task) {
 		var contentConfiguration = cell.defaultContentConfiguration()
 
-		cell.tintColor = .red
+		cell.tintColor = Colors.red
 		cell.selectionStyle = .none
 
 		switch task {
