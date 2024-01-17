@@ -1,10 +1,14 @@
 import ProjectDescription
 
+// Settings
+
 enum ProjectSettings {
 	public static var projectName: String { "MdEditor" }
 	public static var organizationName: String { "LivelockTeam" }
 	public static var bundleId: String { "ru.LivelockTeam.MdEditor" }
 }
+
+// Scripts
 
 private var scripts: [TargetScript] {
 	var scripts = [TargetScript]()
@@ -28,6 +32,47 @@ private var scripts: [TargetScript] {
 	return scripts
 }
 
+// Targets
+
+let mainTarget = Target(
+	name: ProjectSettings.projectName,
+	destinations: .iOS,
+	product: .app,
+	bundleId: ProjectSettings.bundleId,
+	infoPlist: "Info.plist",
+	sources: ["Sources/**", "Shared/**"],
+	resources: ["Resources/**"],
+	scripts: scripts,
+	dependencies: [
+		.package(product: "TaskManagerPackage"),
+		.package(product: "DataStructures")
+	]
+)
+
+let unitTestsTarget = Target(
+	name: "\(ProjectSettings.projectName)Tests",
+	platform: .iOS,
+	product: .unitTests,
+	bundleId: ProjectSettings.bundleId,
+	sources: ["MdEditorTests/Sources/**"],
+	dependencies: [
+		.target(name: "MdEditor")
+	]
+)
+
+let uiTestsTarget = Target(
+	name: "\(ProjectSettings.projectName)UITests",
+	platform: .iOS,
+	product: .uiTests,
+	bundleId: ProjectSettings.bundleId,
+	sources: ["MdEditorUITests/Sources/**"],
+	dependencies: [
+		.target(name: "MdEditor")
+	]
+)
+
+// Project
+
 let project = Project(
 	name: ProjectSettings.projectName,
 	organizationName: ProjectSettings.organizationName,
@@ -36,19 +81,31 @@ let project = Project(
 		.package(path: "Packages/DataStructures")
 	],
 	targets: [
-		Target(
-			name: ProjectSettings.projectName,
-			destinations: .iOS,
-			product: .app,
-			bundleId: ProjectSettings.bundleId,
-			infoPlist: "Info.plist",
-			sources: ["Sources/**"],
-			resources: ["Resources/**"],
-			scripts: scripts,
-			dependencies: [
-				.package(product: "TaskManagerPackage"),
-				.package(product: "DataStructures")
-			]
+		mainTarget,
+		unitTestsTarget,
+		uiTestsTarget
+	],
+	schemes: [
+		Scheme(
+			name: "\(ProjectSettings.projectName)",
+			shared: true,
+			buildAction: .buildAction(targets: ["\(ProjectSettings.projectName)"]),
+			testAction: .targets(["\(ProjectSettings.projectName)Tests"]),
+			runAction: .runAction(executable: "\(ProjectSettings.projectName)")
+		),
+		Scheme(
+			name: "\(ProjectSettings.projectName)Tests",
+			shared: true,
+			buildAction: .buildAction(targets: ["\(ProjectSettings.projectName)Tests"]),
+			testAction: .targets(["\(ProjectSettings.projectName)Tests"]),
+			runAction: .runAction(executable: "\(ProjectSettings.projectName)Tests")
+		),
+		Scheme(
+			name: "\(ProjectSettings.projectName)UITests",
+			shared: true,
+			buildAction: .buildAction(targets: ["\(ProjectSettings.projectName)UITests"]),
+			testAction: .targets(["\(ProjectSettings.projectName)UITests"]),
+			runAction: .runAction(executable: "\(ProjectSettings.projectName)UITests")
 		)
 	]
 )
