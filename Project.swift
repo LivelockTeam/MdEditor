@@ -65,7 +65,7 @@ let uiTestsTarget = Target(
 	platform: .iOS,
 	product: .uiTests,
 	bundleId: ProjectSettings.bundleId,
-	sources: ["MdEditorUITests/Sources/**"],
+	sources: ["MdEditorUITests/Sources/**", "Shared/**"],
 	dependencies: [
 		.target(name: "MdEditor")
 	]
