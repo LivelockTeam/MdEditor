@@ -1,5 +1,5 @@
 //
-//  Arguments.swift
+//  AccessibilityIdentifier.swift
 //  MdEditor
 //
 //  Created by Иван Лясковец on 17.01.2024.
@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+enum LoginViewIdentifier: String {
+	case textFieldLogin
+	case textFieldPass
+	case buttonLogin
+}
