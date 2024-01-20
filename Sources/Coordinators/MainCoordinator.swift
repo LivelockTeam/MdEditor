@@ -10,13 +10,14 @@ final class MainCoordinator: BaseCoordinator {
 
 	// MARK: - Dependencies
 
-	var navigationController: UINavigationController
-	private let taskManager = TaskManager()
+	private let navigationController: UINavigationController
+	private let taskManager: ITaskManager
 
 	// MARK: - Initialization
 
-	init(navigationController: UINavigationController) {
+	init(navigationController: UINavigationController, taskManager: ITaskManager) {
 		self.navigationController = navigationController
+		self.taskManager = taskManager
 	}
 
 	// MARK: - Internal methods

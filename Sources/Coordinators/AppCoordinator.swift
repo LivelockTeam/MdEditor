@@ -4,19 +4,22 @@
 //
 
 import UIKit
+import TaskManagerPackage
 
 final class AppCoordinator: BaseCoordinator {
 
 	// MARK: - Dependencies
 
-	private let navigationController: UINavigationController
 	private var window: UIWindow?
+	private let navigationController: UINavigationController
+	private let taskManager: ITaskManager
 
 	// MARK: - Initialization
 
-	init(window: UIWindow?) {
+	init(window: UIWindow?, taskManager: ITaskManager) {
 		self.window = window
 		self.navigationController = UINavigationController()
+		self.taskManager = taskManager
 	}
 
 	// MARK: - Internal methods
@@ -41,7 +44,7 @@ final class AppCoordinator: BaseCoordinator {
 	}
 
 	func runMainFlow() {
-		let coordinator = MainCoordinator(navigationController: navigationController)
+		let coordinator = MainCoordinator(navigationController: navigationController, taskManager: taskManager)
 		addDependency(coordinator)
 		coordinator.start()
 	}

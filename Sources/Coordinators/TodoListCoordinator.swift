@@ -27,11 +27,7 @@ final class TodoListCoordinator: ICoordinator {
 	}
 
 	private func showTodoListScene() {
-		let repository = TaskRepositoryStub()
-		let orderedTaskManager = OrderedTaskManager(taskManager: taskManager)
-		orderedTaskManager.addTasks(tasks: repository.getTasks())
-
-		let assembler = TodoListAssembler(taskManager: orderedTaskManager)
+		let assembler = TodoListAssembler(taskManager: taskManager)
 		let viewController = assembler.assembly()
 		navigationController.setViewControllers([viewController], animated: true)
 	}

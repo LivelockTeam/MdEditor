@@ -15,7 +15,7 @@ final class LoginCoordinator: ILoginCoordinator {
 
 	// MARK: - Dependencies
 
-	var navigationController: UINavigationController
+	private let navigationController: UINavigationController
 
 	// MARK: - Internal properties
 
