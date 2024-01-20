@@ -17,10 +17,9 @@ final class LoginViewController: UIViewController {
 
 	// MARK: - Private properties
 
-	private lazy var textFieldLogin: UITextField = makeTextField()
-	private lazy var textFieldPass: UITextField = makeTextField()
-	private lazy var buttonLogin: UIButton = makeButtonLogin()
-
+	private lazy var textFieldLogin: UITextField = makeTextField(accessibilityIdentifier: LoginViewIdentifier.textFieldLogin.rawValue)
+	private lazy var textFieldPass: UITextField = makeTextField(accessibilityIdentifier: LoginViewIdentifier.textFieldPass.rawValue)
+	private lazy var buttonLogin: UIButton = makeButtonLogin(accessibilityIdentifier: LoginViewIdentifier.buttonLogin.rawValue)
 	private var constraints = [NSLayoutConstraint]()
 
 	// MARK: - Initialization
@@ -62,7 +61,7 @@ private extension LoginViewController {
 
 private extension LoginViewController {
 
-	func makeTextField() -> UITextField {
+	func makeTextField(accessibilityIdentifier: String) -> UITextField {
 		let textField = UITextField()
 
 		textField.backgroundColor = Colors.white
@@ -74,13 +73,12 @@ private extension LoginViewController {
 		textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: Sizes.Padding.half, height: textField.frame.height))
 		textField.leftViewMode = .always
 		textField.translatesAutoresizingMaskIntoConstraints = false
-
-		textField.translatesAutoresizingMaskIntoConstraints = false
+		textField.accessibilityIdentifier = accessibilityIdentifier
 
 		return textField
 	}
 
-	func makeButtonLogin() -> UIButton {
+	func makeButtonLogin(accessibilityIdentifier: String) -> UIButton {
 		let button = UIButton()
 
 		button.configuration = .filled()
@@ -88,8 +86,8 @@ private extension LoginViewController {
 		button.configuration?.baseBackgroundColor = Colors.red
 		button.configuration?.title = L10n.Login.btnLoginText
 		button.addTarget(self, action: #selector(login), for: .touchUpInside)
-
 		button.translatesAutoresizingMaskIntoConstraints = false
+		button.accessibilityIdentifier = accessibilityIdentifier
 
 		return button
 	}
