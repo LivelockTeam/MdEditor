@@ -13,7 +13,7 @@ final class LoginScreenObject: BaseScreenObject {
 	// MARK: - Private properties
 
 	private lazy var textFieldLogin = app.textFields[LoginViewIdentifier.textFieldLogin.rawValue]
-	private lazy var textFieldPass = app.textFields[LoginViewIdentifier.textFieldPass.rawValue]
+	private lazy var textFieldPass = app.secureTextFields[LoginViewIdentifier.textFieldPass.rawValue]
 	private lazy var buttonLogin = app.buttons[LoginViewIdentifier.buttonLogin.rawValue]
 
 	// MARK: - ScreenObject methods
