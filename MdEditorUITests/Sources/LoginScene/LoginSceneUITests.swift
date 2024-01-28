@@ -10,6 +10,8 @@ import XCTest
 
 final class LoginSceneUITests: XCTestCase {
 
+	// MARK: - Private properties
+
 	private let app = XCUIApplication()
 
 	private enum ValidCredentials: String {
@@ -21,10 +23,14 @@ final class LoginSceneUITests: XCTestCase {
 		case pass = "!23$$ap"
 	}
 
+	// MARK: - Test setup
+
 	override func setUp() {
 		app.launchArguments = ["-AppleLanguages", "(ru)"]
 		app.launch()
 	}
+
+	// MARK: - Test methods
 
 	func test_login_withValidCredentials_shouldBeSuccess() {
 		let screen = LoginScreenObject(app: app)
@@ -52,6 +58,7 @@ final class LoginSceneUITests: XCTestCase {
 			.login()
 
 		// Обработка уведомления об ошибке
+		// UIInterruptionMonitor не отлавливает
 		let errorMessage = app.alerts.staticTexts["Неверный пароль и логин."]
 		if errorMessage.exists {
 			app.alerts.buttons["Ок"].tap()
