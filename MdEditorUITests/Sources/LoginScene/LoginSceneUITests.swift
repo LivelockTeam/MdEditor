@@ -1,5 +1,5 @@
 //
-//  LoginSceneUITest.swift
+//  LoginSceneUITests.swift
 //  MdEditorUITests
 //
 //  Created by Sergey Rumyantsev on 21.01.2024.
@@ -8,14 +8,18 @@
 
 import XCTest
 
-final class LoginSceneUITest: XCTestCase {
+final class LoginSceneUITests: XCTestCase {
 
 	private let app = XCUIApplication()
 
-	private let validLogin = "Admin"
-	private let validPass = "pa$$32!"
-	private let notValidLogin = "nimdA"
-	private let notValidPass = "!23$$ap"
+	private enum ValidCredentials: String {
+		case login = "Admin"
+		case pass = "pa$$32!"
+	}
+	private enum NotValidCredentials: String {
+		case login = "nimdA"
+		case pass = "!23$$ap"
+	}
 
 	override func setUp() {
 		app.launchArguments = ["-AppleLanguages", "(ru)"]
@@ -25,12 +29,14 @@ final class LoginSceneUITest: XCTestCase {
 	func test_login_withValidCredentials_shouldBeSuccess() {
 		let screen = LoginScreenObject(app: app)
 
+		// Авторизация с корректными данными
 		screen
 			.isLoginScreen()
-			.set(login: validLogin)
-			.set(pass: validPass)
+			.set(login: ValidCredentials.login.rawValue)
+			.set(pass: ValidCredentials.pass.rawValue)
 			.login()
 
+		// Проверка перехода на новый экран
 		screen
 			.isNotLoginScreen()
 	}
@@ -38,21 +44,14 @@ final class LoginSceneUITest: XCTestCase {
 	func test_login_withNotValidCredentials_shouldBeFail() {
 		let screen = LoginScreenObject(app: app)
 
+		// Авторизация с некорректными данными
 		screen
 			.isLoginScreen()
-			.set(login: notValidLogin)
-			.set(pass: notValidPass)
+			.set(login: NotValidCredentials.login.rawValue)
+			.set(pass: NotValidCredentials.pass.rawValue)
 			.login()
 
-//		addUIInterruptionMonitor(withDescription: "Error") { (alert) -> Bool in
-//			let errorMessage = "Неверный пароль и логин."
-//			XCTAssert(alert.staticTexts[errorMessage].exists, "Ожидаемое сообщение об ошибке не обнаружено")
-//
-//			let okButton = alert.buttons["Ок"]
-//			okButton.tap()
-//			return true
-//		}
-
+		// Обработка уведомления об ошибке
 		let errorMessage = app.alerts.staticTexts["Неверный пароль и логин."]
 		if errorMessage.exists {
 			app.alerts.buttons["Ок"].tap()
@@ -60,6 +59,7 @@ final class LoginSceneUITest: XCTestCase {
 			XCTAssertTrue(errorMessage.exists, "Ожидаемое сообщение об ошибке не обнаружено")
 		}
 
+		// Проверка возврата к экрану Login
 		screen
 			.isLoginScreen()
 	}
