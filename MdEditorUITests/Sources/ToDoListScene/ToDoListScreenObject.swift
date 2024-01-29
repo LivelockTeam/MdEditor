@@ -33,6 +33,6 @@ final class ToDoListScreenObject: BaseScreenObject {
 
 private extension ToDoListScreenObject {
 	func getToDoListTableViewSection(indexPath: IndexPath) -> XCUIElement {
-		app.tableRows[ToDoListViewIdentifier.toDoListTableViewCell(indexPath).description]
+		toDoListTableView.tableRows[ToDoListViewIdentifier.toDoListTableViewCell(indexPath).description]
 	}
 }
