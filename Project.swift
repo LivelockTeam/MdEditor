@@ -67,7 +67,8 @@ let uiTestsTarget = Target(
 	bundleId: ProjectSettings.bundleId,
 	sources: ["MdEditorUITests/Sources/**", "Shared/**"],
 	dependencies: [
-		.target(name: "MdEditor")
+		.target(name: "MdEditor"),
+		.package(product: "TaskManagerPackage")
 	]
 )
 
