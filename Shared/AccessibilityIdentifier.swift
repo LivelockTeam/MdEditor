@@ -13,3 +13,17 @@ enum LoginViewIdentifier: String {
 	case textFieldPass
 	case buttonLogin
 }
+
+enum ToDoListViewIdentifier {
+	case toDoListTableView
+	case toDoListTableViewCell(IndexPath)
+	
+	var description: String {
+		switch self {
+		case .toDoListTableView:
+			return "toDoListTableView"
+		case .toDoListTableViewCell(let indexPath):
+			return "toDoListtableViewCellSection\(indexPath.section)Id\(indexPath.row)"
+		}
+	}
+}
