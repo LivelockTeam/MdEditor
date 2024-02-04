@@ -20,7 +20,6 @@ enum HomeModel {
 	}
 
 	struct Response {
-
 	}
 
 	struct ViewModel {
