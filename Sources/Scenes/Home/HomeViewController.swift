@@ -20,8 +20,6 @@ protocol IHomeViewController: AnyObject {
 // MARK: - Constants
 
 private enum Constants {
-	static let smallPadding: CGFloat = 8
-	static let standartPadding: CGFloat = 16
 	static let collectionViewHeight: CGFloat = 180
 	static let tableViewCellHeight: CGFloat = 60
 
@@ -193,7 +191,7 @@ private extension HomeViewController {
 		NSLayoutConstraint.activate([
 			collectionView.topAnchor.constraint(
 				equalTo: view.safeAreaLayoutGuide.topAnchor,
-				constant: Constants.standartPadding
+				constant: Sizes.Padding.normal
 			),
 			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -201,7 +199,7 @@ private extension HomeViewController {
 		])
 
 		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Constants.standartPadding),
+			tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Sizes.Padding.normal),
 			tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
