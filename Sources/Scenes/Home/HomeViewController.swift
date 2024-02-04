@@ -10,26 +10,27 @@ import UIKit
 
 // MARK: - IHomeViewController
 
-/// Протокол главного экрана приложения.
+/// Протокол вью главного экрана MdEditor'a.
 protocol IHomeViewController: AnyObject {
 	/// Метод отрисовки информации на экране.
-	/// - Parameter viewModel: данные для отрисовки на экране.
+	/// - Parameter viewModel: Данные для отрисовки на экране.
 	func render(viewModel: HomeModel.ViewModel)
 }
 
 // MARK: - Constants
 
 private enum Constants {
-	enum Constraits {
-		static let tableViewTopConstant: CGFloat = 180
-	}
-
+	static let smallPadding: CGFloat = 8
+	static let standartPadding: CGFloat = 16
+	static let collectionViewHeight: CGFloat = 180
 	static let tableViewCellHeight: CGFloat = 60
+
+	static let tableViewCellIdentifier: String = "cell"
 }
 
-// MARK: - MainViewController
+// MARK: - HomeViewController
 
-/// Вью главного экрана приложения
+/// Вью главного экрана MdEditor'a.
 final class HomeViewController: UIViewController {
 
 	// MARK: - Dependencies
@@ -42,7 +43,7 @@ final class HomeViewController: UIViewController {
 		// Flow
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.scrollDirection = .horizontal
-		flowLayout.itemSize = CGSize(width: 90, height: 140)
+		flowLayout.itemSize = CGSize(width: 90, height: 170)
 		flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
 		// Collection
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -61,18 +62,27 @@ final class HomeViewController: UIViewController {
 		tableView.delegate = self
 		tableView.separatorStyle = .none
 		tableView.isScrollEnabled = false
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.tableViewCellIdentifier)
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		return tableView
 	}()
 
 	// MARK: - Private properties
 
-	private var viewModel = HomeModel.ViewModel(menuPoints: [
-		HomeModel.ViewModel.MenuPoint(title: "New", image: UIImage(systemName: "doc")),
-		HomeModel.ViewModel.MenuPoint(title: "Open", image: UIImage(systemName: "folder")),
-		HomeModel.ViewModel.MenuPoint(title: "About", image: UIImage(systemName: "info.circle"))
-	])
+	private var viewModel = HomeModel.ViewModel(
+		menuPoints: [
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.newDocument, image: UIImage(systemName: "doc")),
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.openDocument, image: UIImage(systemName: "folder")),
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.about, image: UIImage(systemName: "info.circle"))
+		],
+		documents: [
+			HomeModel.ViewModel.MdDocument(title: "about.md", backgroundColor: .yellow),
+			HomeModel.ViewModel.MdDocument(title: "ascii.md", backgroundColor: .blue),
+			HomeModel.ViewModel.MdDocument(title: "utm.md", backgroundColor: .brown),
+			HomeModel.ViewModel.MdDocument(title: "test.md", backgroundColor: .gray),
+			HomeModel.ViewModel.MdDocument(title: "test.md", backgroundColor: .green)
+		]
+	)
 
 	// MARK: - Init
 
@@ -93,6 +103,7 @@ final class HomeViewController: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		#warning("TODO: Обработать загрузку данных")
 		// interactor?.fetchData()
 	}
 }
@@ -118,7 +129,7 @@ extension HomeViewController: UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let menuPoint = getMenuPointForIndex(indexPath)
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableViewCellIdentifier, for: indexPath)
 		configureCell(cell, with: menuPoint)
 		return cell
 	}
@@ -132,6 +143,7 @@ extension HomeViewController: UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		#warning("TODO: Обработать нажатие на кнопку меню")
 		// interactor?.didTaskSelected(request: TodoListModel.Request.TaskSelected(indexPath: indexPath))
 	}
 }
@@ -140,12 +152,17 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		5
+		viewModel.documents.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifier, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-		cell.configure(model: HomeCollectionViewCellModel(title: "test.txt", color: .blue))
+		guard let cell = collectionView.dequeueReusableCell(
+			withReuseIdentifier: HomeCollectionViewCell.identifier,
+			for: indexPath
+		) as? HomeCollectionViewCell else { return UICollectionViewCell() }
+		let document = viewModel.documents[indexPath.item]
+		let model = HomeCollectionViewCellModel(title: document.title, color: document.backgroundColor)
+		cell.configure(model: model)
 		return cell
 	}
 }
@@ -154,6 +171,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		#warning("TODO: Обработать нажатие по документу")
 		// print(indexPath.item)
 	}
 }
@@ -173,14 +191,17 @@ private extension HomeViewController {
 
 	func setupConstraits() {
 		NSLayoutConstraint.activate([
-			collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			collectionView.topAnchor.constraint(
+				equalTo: view.safeAreaLayoutGuide.topAnchor,
+				constant: Constants.standartPadding
+			),
 			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			collectionView.heightAnchor.constraint(equalToConstant: 160)
+			collectionView.heightAnchor.constraint(equalToConstant: Constants.collectionViewHeight)
 		])
 
 		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Constraits.tableViewTopConstant),
+			tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Constants.standartPadding),
 			tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

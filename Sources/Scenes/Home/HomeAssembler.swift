@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class HomeAssembler {
-	/// Сборка главного модуля MdEditor'a
+enum HomeAssembler {
+	/// Сборка главного экрана MdEditor'a
 	/// - Returns: вью
 	static func assembly() -> HomeViewController {
 		let viewController = HomeViewController()

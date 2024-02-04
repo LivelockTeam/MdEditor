@@ -20,3 +20,6 @@
 "TodoList.Regular" = "Regular";
 
 "Home.Title" = "MdEditor";
+"Home.NewDocument" = "New";
+"Home.OpenDocument" = "Open";
+"Home.About" = "About";

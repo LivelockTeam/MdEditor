@@ -8,12 +8,14 @@
 
 import Foundation
 
+/// Протокол презентера главного экрана MdEditor'a.
 protocol IHomePresenter {
 	/// Отображение главного экрана.
 	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: HomeModel.Response)
 }
 
+/// Презентер главного экрана MdEditor'a.
 final class HomePresenter: IHomePresenter {
 
 	// MARK: - Dependencies
