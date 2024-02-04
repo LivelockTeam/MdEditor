@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - HomeCollectionViewCellModel
+
 struct HomeCollectionViewCellModel {
 	let title: String
 }

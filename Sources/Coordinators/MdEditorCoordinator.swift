@@ -27,11 +27,23 @@ final class MdEditorCoordinator: ICoordinator {
 	}
 }
 
-// MARK: - Private method
+// MARK: - Private methods
 
 private extension MdEditorCoordinator {
 	func showHomeScreen() {
 		let viewController = HomeAssembler.assembly()
 		self.navigationController.setViewControllers([viewController], animated: true)
+	}
+
+	func showNewDocument() {
+
+	}
+
+	func showOpenDocument() {
+
+	}
+
+	func showAbout() {
+
 	}
 }
