@@ -45,5 +45,6 @@ private extension MdEditorCoordinator {
 
 	func showAbout() {
 		#warning("TODO: Переход на окно с документом About")
+
 	}
 }
