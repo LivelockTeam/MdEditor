@@ -36,14 +36,14 @@ private extension MdEditorCoordinator {
 	}
 
 	func showNewDocument() {
-
+		#warning("TODO: Переход на окно с новым документов")
 	}
 
 	func showOpenDocument() {
-
+		#warning("TODO: Переход на окно с открытием документа (по id или другому параметру?)")
 	}
 
 	func showAbout() {
-
+		#warning("TODO: Переход на окно с документом About")
 	}
 }

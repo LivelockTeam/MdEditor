@@ -26,6 +26,8 @@ private enum Constants {
 	static let tableViewCellHeight: CGFloat = 60
 
 	static let tableViewCellIdentifier: String = "cell"
+	static let collectionContentInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+	static let collectionItemSize = CGSize(width: 90, height: 170)
 }
 
 // MARK: - HomeViewController
@@ -43,8 +45,8 @@ final class HomeViewController: UIViewController {
 		// Flow
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.scrollDirection = .horizontal
-		flowLayout.itemSize = CGSize(width: 90, height: 170)
-		flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+		flowLayout.itemSize = Constants.collectionItemSize
+		flowLayout.sectionInset = Constants.collectionContentInset
 		// Collection
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
 		collectionView.dataSource = self
@@ -69,6 +71,7 @@ final class HomeViewController: UIViewController {
 
 	// MARK: - Private properties
 
+	#warning("TODO: Избавиться от хардкода")
 	private var viewModel = HomeModel.ViewModel(
 		menuPoints: [
 			HomeModel.ViewModel.MenuPoint(title: L10n.Home.newDocument, image: "doc"),
