@@ -181,7 +181,7 @@ extension HomeViewController: UICollectionViewDelegate {
 private extension HomeViewController {
 	func setupView() {
 		title = L10n.Home.title
-		view.backgroundColor = .white
+		view.backgroundColor = Theme.white
 		navigationController?.navigationBar.prefersLargeTitles = true
 
 		view.addSubview(collectionView)
