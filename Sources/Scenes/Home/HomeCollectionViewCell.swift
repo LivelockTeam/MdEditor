@@ -10,8 +10,9 @@ import UIKit
 
 struct HomeCollectionViewCellModel {
 	let title: String
-	let color: UIColor
 }
+
+// MARK: - HomeCollectionViewCell
 
 final class HomeCollectionViewCell: UICollectionViewCell {
 
@@ -51,7 +52,7 @@ final class HomeCollectionViewCell: UICollectionViewCell {
 
 	func configure(model: HomeCollectionViewCellModel) {
 		titleLabel.text = model.title
-		imageView.backgroundColor = model.color
+		imageView.backgroundColor = .gray
 	}
 }
 

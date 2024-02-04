@@ -39,15 +39,16 @@ final class HomeInteractor: IHomeInteractor {
 	// MARK: - Public methods
 
 	func fetchData() {
+		#warning("TODO: Обработать загрузку данных")
 		// let response = MainModel.Response(data: responseData)
 		// presenter.present(response: response)
 	}
 
 	func didMenuPointSelected(request: HomeModel.Request.MenuPointSelected) {
-
+		#warning("TODO: Обработать нажатие на кнопку меню")
 	}
 
 	func didDocumentSelected(request: HomeModel.Request.DocumentSelected) {
-
+		#warning("TODO: Обработать нажатие по документу")
 	}
 }

@@ -20,7 +20,7 @@ enum HomeModel {
 	}
 
 	struct Response {
-		var result: Result<Void, Error>
+		// var documentsResult: Result<Data, Error>
 	}
 
 	struct ViewModel {
@@ -39,7 +39,7 @@ enum HomeModel {
 		/// Документ
 		struct MdDocument {
 			let title: String
-			let backgroundColor: UIColor
+			// let backgroundColor: UIColor
 		}
 	}
 }

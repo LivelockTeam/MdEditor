@@ -71,16 +71,16 @@ final class HomeViewController: UIViewController {
 
 	private var viewModel = HomeModel.ViewModel(
 		menuPoints: [
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.newDocument, image: UIImage(systemName: "doc")),
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.openDocument, image: UIImage(systemName: "folder")),
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.about, image: UIImage(systemName: "info.circle"))
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.newDocument, image: "doc"),
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.openDocument, image: "folder"),
+			HomeModel.ViewModel.MenuPoint(title: L10n.Home.about, image: "info.circle")
 		],
 		documents: [
-			HomeModel.ViewModel.MdDocument(title: "about.md", backgroundColor: .yellow),
-			HomeModel.ViewModel.MdDocument(title: "ascii.md", backgroundColor: .blue),
-			HomeModel.ViewModel.MdDocument(title: "utm.md", backgroundColor: .brown),
-			HomeModel.ViewModel.MdDocument(title: "test.md", backgroundColor: .gray),
-			HomeModel.ViewModel.MdDocument(title: "test.md", backgroundColor: .green)
+			HomeModel.ViewModel.MdDocument(title: "about.md"),
+			HomeModel.ViewModel.MdDocument(title: "ascii.md"),
+			HomeModel.ViewModel.MdDocument(title: "utm.md"),
+			HomeModel.ViewModel.MdDocument(title: "test.md"),
+			HomeModel.ViewModel.MdDocument(title: "test.md")
 		]
 	)
 
@@ -103,8 +103,7 @@ final class HomeViewController: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		#warning("TODO: Обработать загрузку данных")
-		// interactor?.fetchData()
+		interactor?.fetchData()
 	}
 }
 
@@ -143,8 +142,7 @@ extension HomeViewController: UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		#warning("TODO: Обработать нажатие на кнопку меню")
-		// interactor?.didTaskSelected(request: TodoListModel.Request.TaskSelected(indexPath: indexPath))
+		interactor?.didMenuPointSelected(request: HomeModel.Request.MenuPointSelected(indexPath: indexPath))
 	}
 }
 
@@ -161,7 +159,7 @@ extension HomeViewController: UICollectionViewDataSource {
 			for: indexPath
 		) as? HomeCollectionViewCell else { return UICollectionViewCell() }
 		let document = viewModel.documents[indexPath.item]
-		let model = HomeCollectionViewCellModel(title: document.title, color: document.backgroundColor)
+		let model = HomeCollectionViewCellModel(title: document.title)
 		cell.configure(model: model)
 		return cell
 	}
@@ -171,8 +169,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		#warning("TODO: Обработать нажатие по документу")
-		// print(indexPath.item)
+		interactor?.didDocumentSelected(request: HomeModel.Request.DocumentSelected(indexPath: indexPath))
 	}
 }
 
@@ -219,7 +216,7 @@ private extension HomeViewController {
 
 		var contentConfiguration = cell.defaultContentConfiguration()
 		contentConfiguration.attributedText = NSAttributedString(string: menuPoint.title)
-		contentConfiguration.image = menuPoint.image
+		contentConfiguration.image = UIImage(systemName: menuPoint.image)
 		cell.contentConfiguration = contentConfiguration
 	}
 }

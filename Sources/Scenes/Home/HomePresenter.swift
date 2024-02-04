@@ -33,6 +33,6 @@ final class HomePresenter: IHomePresenter {
 	/// Отображение главного экрана.
 	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: HomeModel.Response) {
-
+		#warning("TODO: Создать модель респонса и обработать ее")
 	}
 }
