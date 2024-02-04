@@ -20,7 +20,6 @@ enum HomeModel {
 	}
 
 	struct Response {
-		// var documentsResult: Result<Data, Error>
 	}
 
 	struct ViewModel {

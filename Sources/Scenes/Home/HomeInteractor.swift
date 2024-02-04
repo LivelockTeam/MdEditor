@@ -40,8 +40,6 @@ final class HomeInteractor: IHomeInteractor {
 
 	func fetchData() {
 		#warning("TODO: Обработать загрузку данных")
-		// let response = MainModel.Response(data: responseData)
-		// presenter.present(response: response)
 	}
 
 	func didMenuPointSelected(request: HomeModel.Request.MenuPointSelected) {

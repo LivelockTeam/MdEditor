@@ -6,6 +6,9 @@
   Copyright © 2024 LivelockTeam. All rights reserved.
 */
 
+"Common.ok" = "Ок";
+"Common.error" = "Ошибка";
+
 "Login.title" = "Авторизация";
 "Login.tfLoginPlaceholder" = "Логин";
 "Login.tfPasswordPlaceholder" = "Пароль";
