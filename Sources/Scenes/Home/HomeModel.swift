@@ -20,6 +20,7 @@ enum HomeModel {
 	}
 
 	struct Response {
+		#warning("TODO: Придумать модель респонса")
 	}
 
 	struct ViewModel {

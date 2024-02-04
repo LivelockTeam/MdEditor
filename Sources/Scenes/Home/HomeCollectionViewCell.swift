@@ -14,6 +14,13 @@ struct HomeCollectionViewCellModel {
 	let title: String
 }
 
+// MARK: - Private constants
+
+private enum Constants {
+	static let imageViewCornerRadius: CGFloat = 8
+	static let imageViewHeight: CGFloat = 150
+}
+
 // MARK: - HomeCollectionViewCell
 
 final class HomeCollectionViewCell: UICollectionViewCell {
@@ -24,10 +31,8 @@ final class HomeCollectionViewCell: UICollectionViewCell {
 
 	private var imageView: UIImageView = {
 		let imageView = UIImageView(frame: .zero)
-		imageView.contentMode = .scaleAspectFill
-		imageView.backgroundColor = .blue
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.layer.cornerRadius = 8
+		imageView.layer.cornerRadius = Constants.imageViewCornerRadius
 		return imageView
 	}()
 
@@ -73,7 +78,7 @@ private extension HomeCollectionViewCell {
 			imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
 			imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
 			imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-			imageView.heightAnchor.constraint(equalToConstant: 150)
+			imageView.heightAnchor.constraint(equalToConstant: Constants.imageViewHeight)
 		])
 
 		NSLayoutConstraint.activate([
