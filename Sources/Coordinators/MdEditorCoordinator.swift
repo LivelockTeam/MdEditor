@@ -23,11 +23,15 @@ final class MdEditorCoordinator: ICoordinator {
 	// MARK: - Internal methods
 
 	func start() {
-		showEditorStartScreen()
+		showHomeScreen()
 	}
+}
 
-	private func showEditorStartScreen() {
-		let viewController = EditorStartScreenAssembler.assembly()
+// MARK: - Private method
+
+private extension MdEditorCoordinator {
+	func showHomeScreen() {
+		let viewController = HomeAssembler.assembly()
 		self.navigationController.setViewControllers([viewController], animated: true)
 	}
 }
