@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+protocol IEditorStartScreenPresenter { }
+
+final class EditorStartScreenPresenter {
+
+	// MARK: - Dependencies
+
+	private weak var viewController: IEditorStartScreenViewController?
+
+	// MARK: - Init
+
+	init(viewController: IEditorStartScreenViewController?) {
+		self.viewController = viewController
+	}
+}
+
+extension EditorStartScreenPresenter: IEditorStartScreenPresenter { }

@@ -18,3 +18,5 @@
 "TodoList.All" = "All";
 "TodoList.Important" = "Important";
 "TodoList.Regular" = "Regular";
+
+"MdEditorStartScreen.Title" = "MdEditor";

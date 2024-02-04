@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+protocol IEditorStartScreenInteractor {}
+
+final class EditorStartScreenInteractor {
+
+	// MARK: - Dependencies
+
+	private var presenter: IEditorStartScreenPresenter?
+
+	// MARK: - Init
+
+	init(presenter: IEditorStartScreenPresenter?) {
+		self.presenter = presenter
+	}
+}
+
+extension EditorStartScreenInteractor: IEditorStartScreenInteractor {}

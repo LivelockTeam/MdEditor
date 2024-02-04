@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+final class EditorStartScreenAssembler {
+
+	static func assembly() -> EditorStartScreenViewController {
+		let viewController = EditorStartScreenViewController()
+		let presenter = EditorStartScreenPresenter(viewController: viewController)
+		let interactor = EditorStartScreenInteractor(presenter: presenter)
+		viewController.interactor = interactor
+		return viewController
+	}
+}

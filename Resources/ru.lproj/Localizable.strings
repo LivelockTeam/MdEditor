@@ -18,3 +18,5 @@
 "TodoList.All" = "Все";
 "TodoList.Important" = "Важные";
 "TodoList.Regular" = "Обычные";
+
+"MdEditorStartScreen.Title" = "Редактор";

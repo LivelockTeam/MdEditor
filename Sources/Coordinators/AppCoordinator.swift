@@ -25,7 +25,7 @@ final class AppCoordinator: BaseCoordinator {
 	// MARK: - Internal methods
 
 	override func start() {
-		runLoginFlow()
+		runMdEditorFlow()
 	}
 
 	func runLoginFlow() {
@@ -47,5 +47,14 @@ final class AppCoordinator: BaseCoordinator {
 		let coordinator = MainCoordinator(navigationController: navigationController, taskManager: taskManager)
 		addDependency(coordinator)
 		coordinator.start()
+	}
+
+	func runMdEditorFlow() {
+		let coordinator = MdEditorCoordinator(navigationController: navigationController)
+		addDependency(coordinator)
+		coordinator.start()
+
+		window?.rootViewController = navigationController
+		window?.makeKeyAndVisible()
 	}
 }
