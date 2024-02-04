@@ -19,4 +19,7 @@
 "TodoList.Important" = "Important";
 "TodoList.Regular" = "Regular";
 
-"MdEditorStartScreen.Title" = "MdEditor";
+"Home.Title" = "MdEditor";
+"Home.NewDocument" = "New";
+"Home.OpenDocument" = "Open";
+"Home.About" = "About";
