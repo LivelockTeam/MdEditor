@@ -23,8 +23,7 @@ final class MdEditorCoordinator: BaseCoordinator {
 	// MARK: - Internal methods
 
 	override func start() {
-//		showHomeScreen()
-		showOpenDocument()
+		showHomeScreen()
 	}
 }
 
@@ -48,7 +47,7 @@ private extension MdEditorCoordinator {
 		addDependency(coordinator)
 
 		coordinator.finishFlow = { [weak self, weak coordinator] url in
-			let fileURL = url // url открываемого файла
+			_ = url // url открываемого файла
 			self?.showHomeScreen()
 			coordinator.map { self?.removeDependency($0) }
 		}
