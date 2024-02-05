@@ -29,7 +29,7 @@ final class LoginWorker: ILoginWorker {
 	// MARK: - Private properties
 
 	private let validLogin = "Admin"
-	private let validPassword = "1"
+	private let validPassword = "pa$$321"
 
 	// MARK: - Public methods
 
