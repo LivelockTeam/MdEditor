@@ -33,6 +33,28 @@ final class HomePresenter: IHomePresenter {
 	/// Отображение главного экрана.
 	/// - Parameter response: Подготовленные к отображению данные.
 	func present(responce: HomeModel.Response) {
-		#warning("TODO: Создать модель респонса и обработать ее")
+		let viewModel = HomeModel.ViewModel(
+			menuPoints: convertMenu(response: responce),
+			documents: convertDocuments(response: responce)
+		)
+		viewController?.render(viewModel: viewModel)
+	}
+}
+
+// MARK: - Private methods
+
+private extension HomePresenter {
+	func convertMenu(response: HomeModel.Response) -> [HomeModel.ViewModel.MenuPoint] {
+		let result = response.menu.map { item in
+			return HomeModel.ViewModel.MenuPoint(title: item.title, image: item.image)
+		}
+		return result
+	}
+
+	func convertDocuments(response: HomeModel.Response) -> [HomeModel.ViewModel.MdDocument] {
+		let result = response.documents.map { item in
+			return HomeModel.ViewModel.MdDocument(title: item.title)
+		}
+		return result
 	}
 }

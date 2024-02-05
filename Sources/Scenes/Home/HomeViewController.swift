@@ -20,8 +20,6 @@ protocol IHomeViewController: AnyObject {
 // MARK: - Constants
 
 private enum Constants {
-	static let smallPadding: CGFloat = 8
-	static let standartPadding: CGFloat = 16
 	static let collectionViewHeight: CGFloat = 180
 	static let tableViewCellHeight: CGFloat = 60
 
@@ -71,21 +69,7 @@ final class HomeViewController: UIViewController {
 
 	// MARK: - Private properties
 
-	#warning("TODO: Избавиться от хардкода")
-	private var viewModel = HomeModel.ViewModel(
-		menuPoints: [
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.newDocument, image: "doc"),
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.openDocument, image: "folder"),
-			HomeModel.ViewModel.MenuPoint(title: L10n.Home.about, image: "info.circle")
-		],
-		documents: [
-			HomeModel.ViewModel.MdDocument(title: "about.md"),
-			HomeModel.ViewModel.MdDocument(title: "ascii.md"),
-			HomeModel.ViewModel.MdDocument(title: "utm.md"),
-			HomeModel.ViewModel.MdDocument(title: "test.md"),
-			HomeModel.ViewModel.MdDocument(title: "test.md")
-		]
-	)
+	private var viewModel: HomeModel.ViewModel?
 
 	// MARK: - Init
 
@@ -126,7 +110,7 @@ extension HomeViewController: IHomeViewController {
 
 extension HomeViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		viewModel.menuPoints.count
+		viewModel?.menuPoints.count ?? .zero
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,7 +137,7 @@ extension HomeViewController: UITableViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		viewModel.documents.count
+		viewModel?.documents.count ?? .zero
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,8 +145,8 @@ extension HomeViewController: UICollectionViewDataSource {
 			withReuseIdentifier: HomeCollectionViewCell.identifier,
 			for: indexPath
 		) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-		let document = viewModel.documents[indexPath.item]
-		let model = HomeCollectionViewCellModel(title: document.title)
+		let document = viewModel?.documents[indexPath.item]
+		let model = HomeCollectionViewCellModel(title: document?.title ?? "")
 		cell.configure(model: model)
 		return cell
 	}
@@ -193,7 +177,7 @@ private extension HomeViewController {
 		NSLayoutConstraint.activate([
 			collectionView.topAnchor.constraint(
 				equalTo: view.safeAreaLayoutGuide.topAnchor,
-				constant: Constants.standartPadding
+				constant: Sizes.Padding.normal
 			),
 			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -201,7 +185,7 @@ private extension HomeViewController {
 		])
 
 		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Constants.standartPadding),
+			tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: Sizes.Padding.normal),
 			tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
 			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
 			tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -209,7 +193,7 @@ private extension HomeViewController {
 	}
 
 	func getMenuPointForIndex(_ indexPath: IndexPath) -> HomeModel.ViewModel.MenuPoint {
-		let menuPoints = viewModel.menuPoints
+		guard let menuPoints = viewModel?.menuPoints else { return  HomeModel.ViewModel.MenuPoint(title: "", image: "")}
 		let menuPoint = menuPoints[indexPath.row]
 		return menuPoint
 	}

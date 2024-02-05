@@ -11,6 +11,7 @@ import UIKit
 // MARK: - HomeCollectionViewCellModel
 
 struct HomeCollectionViewCellModel {
+	/// Название документа с расширением
 	let title: String
 }
 
@@ -19,13 +20,15 @@ struct HomeCollectionViewCellModel {
 private enum Constants {
 	static let imageViewCornerRadius: CGFloat = 8
 	static let imageViewHeight: CGFloat = 150
+
+	static let identifier: String = "collectionViewCell"
 }
 
 // MARK: - HomeCollectionViewCell
 
 final class HomeCollectionViewCell: UICollectionViewCell {
 
-	static let identifier: String = "collectionViewCell"
+	static let identifier: String = Constants.identifier
 
 	// MARK: - UI
 
@@ -57,6 +60,8 @@ final class HomeCollectionViewCell: UICollectionViewCell {
 
 	// MARK: Public methods
 
+	/// Конфигурация ячейки
+	/// - Parameter model: Модель ячейки типа HomeCollectionViewCellModel
 	func configure(model: HomeCollectionViewCellModel) {
 		titleLabel.text = model.title
 		imageView.backgroundColor = .gray
