@@ -12,7 +12,7 @@ import Foundation
 protocol IHomePresenter {
 	/// Отображение главного экрана.
 	/// - Parameter response: Подготовленные к отображению данные.
-	func present(responce: HomeModel.Response)
+	func present(response: HomeModel.Response)
 }
 
 /// Презентер главного экрана MdEditor'a.
@@ -32,10 +32,10 @@ final class HomePresenter: IHomePresenter {
 
 	/// Отображение главного экрана.
 	/// - Parameter response: Подготовленные к отображению данные.
-	func present(responce: HomeModel.Response) {
+	func present(response: HomeModel.Response) {
 		let viewModel = HomeModel.ViewModel(
-			menuPoints: convertMenu(response: responce),
-			documents: convertDocuments(response: responce)
+			menuPoints: convertMenu(response: response),
+			documents: convertDocuments(response: response)
 		)
 		viewController?.render(viewModel: viewModel)
 	}

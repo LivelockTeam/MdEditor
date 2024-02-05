@@ -23,9 +23,10 @@ private enum Constants {
 	static let collectionViewHeight: CGFloat = 180
 	static let tableViewCellHeight: CGFloat = 60
 
-	static let tableViewCellIdentifier: String = "cell"
 	static let collectionContentInset = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
 	static let collectionItemSize = CGSize(width: 90, height: 170)
+
+	static let tableViewCellIdentifier: String = "cell"
 }
 
 // MARK: - HomeViewController

@@ -49,8 +49,8 @@ final class HomeInteractor: IHomeInteractor {
 	// MARK: - Public methods
 
 	func fetchData() {
-		let responce = HomeModel.Response(menu: menu, documents: documents)
-		presenter?.present(responce: responce)
+		let response = HomeModel.Response(menu: menu, documents: documents)
+		presenter?.present(response: response)
 	}
 
 	func didMenuPointSelected(request: HomeModel.Request.MenuPointSelected) {

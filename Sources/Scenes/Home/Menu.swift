@@ -37,7 +37,7 @@ enum Menu {
 	}
 }
 
-/// Моковая модель данных документа
+/// Моковая модель документа
 struct MockDocument: IDocument {
 	var title: String
 }

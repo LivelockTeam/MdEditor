@@ -19,6 +19,7 @@ enum HomeModel {
 		}
 	}
 
+	#warning("TODO: Подумать над структурой Response")
 	struct Response {
 		let menu: [Menu]
 		let documents: [IDocument]
@@ -40,7 +41,6 @@ enum HomeModel {
 		/// Документ
 		struct MdDocument {
 			let title: String
-			// let backgroundColor: UIColor
 		}
 	}
 }
