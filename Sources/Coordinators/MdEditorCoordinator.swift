@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MdEditorCoordinator: ICoordinator {
+final class MdEditorCoordinator: BaseCoordinator {
 
 	// MARK: - Dependencies
 
@@ -22,7 +22,7 @@ final class MdEditorCoordinator: ICoordinator {
 
 	// MARK: - Internal methods
 
-	func start() {
+	override func start() {
 		showHomeScreen()
 	}
 }
@@ -41,6 +41,18 @@ private extension MdEditorCoordinator {
 
 	func showOpenDocument() {
 		#warning("TODO: Переход на окно с открытием документа (по id или другому параметру?)")
+
+		// Запуск OpenDocument Flow
+		let coordinator = OpenDocumentCoordinator(navigationController: navigationController)
+		addDependency(coordinator)
+
+		coordinator.finishFlow = { [weak self, weak coordinator] url in
+			_ = url // url открываемого файла
+			self?.showHomeScreen()
+			coordinator.map { self?.removeDependency($0) }
+		}
+
+		coordinator.start()
 	}
 
 	func showAbout() {
