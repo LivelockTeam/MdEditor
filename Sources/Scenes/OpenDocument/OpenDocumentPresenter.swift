@@ -65,7 +65,8 @@ final class OpenDocumentPresenter: IOpenDocumentPresenter {
 			let item = OpenDocumentModel.ViewModel.Item(
 				type: type,
 				title: file.name,
-				subTitle: file.getFormattedAttributes()
+				subTitle: file.getFormattedAttributes(), 
+				path: file.path
 			)
 			items.append(item)
 		}

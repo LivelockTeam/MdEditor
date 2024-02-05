@@ -69,7 +69,22 @@ extension OpenDocumentViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		interactor?.didItemSelected(request: OpenDocumentModel.Request())
+		let item = viewModel.items[indexPath.row]
+
+		var type = OpenDocumentModel.Request.ItemType.file
+		switch item.type {
+		case .folder:
+			type = .folder
+		case .file:
+			type = .file
+		}
+
+		let request = OpenDocumentModel.Request(
+			type: type,
+			title: item.title,
+			path: item.path
+		)
+		interactor?.didItemSelected(request: request)
 	}
 }
 

@@ -47,9 +47,14 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 	/// Событие, что папка или файл были выбраны.
 	/// - Parameter request: Запрос, содержащий информацию о выбранном элементе.
 	func didItemSelected(request: OpenDocumentModel.Request) {
-		// Worker должен передать данные о выбранном объекте (папка или файл)
-		// далее передаём эти данные в OpenDocumentCoordinator через OpenDocumentResultClosure
-
+		var item: ItemType
+		switch request.type {
+		case .folder:
+			item = .folder(ItemType.Folder(title: request.title, path: request.path))
+		case .file:
+			item = .file(ItemType.File(path: request.path))
+		}
+		openDocumentResultClosure?(item)
 	}
 }
 
