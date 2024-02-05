@@ -61,7 +61,7 @@ final class OpenDocumentPresenter: IOpenDocumentPresenter {
 		var items: [OpenDocumentModel.ViewModel.Item] = []
 
 		for file in files {
-			let type = file.isFile ? OpenDocumentModel.ViewModel.ItemType.file : OpenDocumentModel.ViewModel.ItemType.folder
+			let type = file.isDir ? OpenDocumentModel.ViewModel.ItemType.folder : OpenDocumentModel.ViewModel.ItemType.file
 			let item = OpenDocumentModel.ViewModel.Item(
 				type: type,
 				title: file.name,

@@ -10,20 +10,15 @@ import Foundation
 
 class File {
 
-	
+	// MARK: - Public
+
 	var name = ""
 	var path = ""
 	var ext = ""
 	var size: UInt64 = 0
-	var isFile = true
 	var isDir = false
 	var creationDate = Date()
 	var modificationDate = Date()
-	var fullname: String {
-		get {
-			return "\(path)/\(name)"
-		}
-	}
 
 	// MARK: - Public methods
 
@@ -42,7 +37,7 @@ class File {
 	// MARK: - Private methods
 
 	private func getFormattedSize(with size: UInt64) -> String {
-		var convertedValue: Double = Double(size)
+		var convertedValue = Double(size)
 		var multiplyFactor = 0
 		let tokens = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
 		while convertedValue > 1024 {
@@ -101,29 +96,36 @@ class FileExplorer {
 	}
 
 	private func getFile(withNAme name: String, atPath: String) -> File? {
-		let fm = FileManager.default
-		let fullPath = Bundle.main.resourcePath! + "/\(atPath)"
+		let fileManager = FileManager.default
+
 		do {
-			let attr = try fm.attributesOfItem(atPath: fullPath + "/" + name)
+			let attr = try fileManager.attributesOfItem(atPath: atPath + "/" + name)
 
 			let file = File()
 			file.name = name
 			file.path = atPath
-			file.isDir = (attr[FileAttributeKey.type] as! FileAttributeType) == FileAttributeType.typeDirectory
-			file.isFile = (attr[FileAttributeKey.type] as! FileAttributeType) == FileAttributeType.typeRegular
-			file.size = (attr[FileAttributeKey.size] as! UInt64)
-			file.creationDate = (attr[FileAttributeKey.creationDate] as! Date)
-			file.modificationDate = (attr[FileAttributeKey.modificationDate] as! Date)
+			if let type = attr[FileAttributeKey.type] as? FileAttributeType {
+				file.isDir = type == FileAttributeType.typeDirectory
+			}
+			if let size = attr[FileAttributeKey.size] as? UInt64 {
+				file.size = size
+			}
+			if let creationDate = attr[FileAttributeKey.creationDate] as? Date {
+				file.creationDate = creationDate
+			}
+			if let modificationDate = attr[FileAttributeKey.modificationDate] as? Date {
+				file.modificationDate = modificationDate
+			}
 
 			if file.isDir {
 				file.ext = ""
 			} else {
-				file.ext = String(describing: name.split(separator: ".").last!)
+				file.ext = String(describing: name.split(separator: ".").last!) // swiftlint:disable:this force_unwrapping
 			}
 
 			return file
 		} catch {
-
+			// failed to read at path
 		}
 
 		return nil

@@ -39,7 +39,7 @@ final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
 	func showOpenDocumentScene() {
 		let screenTitle = "Open document"
 		let paths = [
-			Bundle.main.resourcePath!,
+			Bundle.main.resourcePath!, // swiftlint:disable:this force_unwrapping
 			FileManager.default.currentDirectoryPath
 		]
 
