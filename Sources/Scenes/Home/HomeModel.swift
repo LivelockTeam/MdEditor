@@ -20,7 +20,8 @@ enum HomeModel {
 	}
 
 	struct Response {
-		#warning("TODO: Придумать модель респонса")
+		let menu: [Menu]
+		let documents: [IDocument]
 	}
 
 	struct ViewModel {

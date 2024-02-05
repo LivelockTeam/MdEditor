@@ -28,7 +28,17 @@ final class HomeInteractor: IHomeInteractor {
 	// MARK: - Dependencies
 
 	private var presenter: IHomePresenter?
-	#warning("TODO: Подключить файловый менеджер для загрузки данных коллекции")
+
+	#warning("TODO: Создать менюбилдер и убрать хардкод")
+	#warning("TODO: Подключить файловый менеджер, чтобы можно было подгружать файлы из файловой системы")
+	private let menu: [Menu] = [.new, .open, .about]
+	private let documents: [IDocument] = [
+		MockDocument(title: "about.md"),
+		MockDocument(title: "ascii.md"),
+		MockDocument(title: "utm.md"),
+		MockDocument(title: "test.md"),
+		MockDocument(title: "about.md")
+	]
 
 	// MARK: - Init
 
@@ -39,7 +49,8 @@ final class HomeInteractor: IHomeInteractor {
 	// MARK: - Public methods
 
 	func fetchData() {
-		#warning("TODO: Обработать загрузку данных")
+		let responce = HomeModel.Response(menu: menu, documents: documents)
+		presenter?.present(responce: responce)
 	}
 
 	func didMenuPointSelected(request: HomeModel.Request.MenuPointSelected) {
