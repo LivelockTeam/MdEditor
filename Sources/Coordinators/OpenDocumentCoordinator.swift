@@ -38,22 +38,28 @@ final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
 
 	func showOpenDocumentScene() {
 		let screenTitle = "Open document"
-		let urls = [URL]()
-		let viewController = showOpenDocumentScreen(screenTitle: screenTitle, urls: urls)
+		let paths = [
+			Bundle.main.resourcePath!,
+			FileManager.default.currentDirectoryPath
+		]
+
+		let viewController = showOpenDocumentScreen(screenTitle: screenTitle, paths: paths)
 		self.navigationController.pushViewController(viewController, animated: true)
 	}
 
-	private func showOpenDocumentScreen(screenTitle: String, urls: [URL]) -> OpenDocumentViewController {
+	private func showOpenDocumentScreen(screenTitle: String, paths: [String]) -> OpenDocumentViewController {
 		let viewController = OpenDocumentAssembler().assembly(
 			screenTitle: screenTitle,
-			urls: urls
+			paths: paths
 		) { [weak self] itemType in
 			switch itemType {
 			case .file(let file):
 				self?.finishFlow?(URL(fileURLWithPath: file.path))
 			case .folder(let folder):
-				guard let url = URL(string: folder.path) else { return }
-				guard let viewController = self?.showOpenDocumentScreen(screenTitle: folder.title, urls: [url]) else { return }
+				guard let viewController = self?.showOpenDocumentScreen(
+					screenTitle: folder.title,
+					paths: [folder.path]
+				) else { return }
 				self?.navigationController.pushViewController(viewController, animated: true)
 			}
 		}

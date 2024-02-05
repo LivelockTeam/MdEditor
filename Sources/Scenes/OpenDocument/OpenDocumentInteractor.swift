@@ -21,7 +21,6 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 
 	private var presenter: IOpenDocumentPresenter
 	private var worker: IOpenDocumentWorker
-	private var urls: [URL]
 	private var openDocumentResultClosure: OpenDocumentResultClosure?
 
 	// MARK: - Initialization
@@ -29,12 +28,10 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 	init(
 		presenter: IOpenDocumentPresenter,
 		worker: IOpenDocumentWorker,
-		urls: [URL],
 		openDocumentResultClosure: OpenDocumentResultClosure?
 	) {
 		self.presenter = presenter
 		self.worker = worker
-		self.urls = urls
 		self.openDocumentResultClosure = openDocumentResultClosure
 	}
 
@@ -42,13 +39,9 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 
 	/// Событие на предоставление информации для списка папок и файлов.
 	func fetchData() {
-		// Worker должен предоставить результат сканирования содержимого по URL
-		// далее передаём эти данные в Presenter для формирования данных для отображения
-
-		// TEST DATA ↓
-		let response = OpenDocumentModel.Response()
+		let items = worker.getFoldersAndFiles()
+		let response = OpenDocumentModel.Response(items: items)
 		presenter.present(response: response)
-		// TEST DATA ↑
 	}
 
 	/// Событие, что папка или файл были выбраны.

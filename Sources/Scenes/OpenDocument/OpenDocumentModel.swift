@@ -14,6 +14,7 @@ enum OpenDocumentModel {
 	}
 
 	struct Response {
+		let items: [File]
 	}
 
 	struct ViewModel {
@@ -26,7 +27,7 @@ enum OpenDocumentModel {
 		}
 
 		enum ItemType: String {
-			case folder = "folder.fill"
+			case folder = "folder"
 			case file = "doc.text"
 		}
 	}

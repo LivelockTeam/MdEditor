@@ -9,7 +9,25 @@
 import Foundation
 
 protocol IOpenDocumentWorker {
+	func getFoldersAndFiles() -> [File]
 }
 
 final class OpenDocumentWorker: IOpenDocumentWorker {
+
+	// MARK: - Private properties
+
+	private var paths: [String]
+
+	// MARK: - Initialization
+
+	internal init(paths: [String]) {
+		self.paths = paths
+	}
+
+	// MARK: - Public methods
+
+	func getFoldersAndFiles() -> [File] {
+		let fileExplorer = FileExplorer()
+		return fileExplorer.getItems(paths: paths)
+	}
 }

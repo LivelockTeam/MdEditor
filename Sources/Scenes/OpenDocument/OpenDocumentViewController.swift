@@ -87,7 +87,6 @@ private extension OpenDocumentViewController {
 	func configureCell(_ cell: UITableViewCell, with item: OpenDocumentModel.ViewModel.Item) {
 		var contentConfiguration = cell.defaultContentConfiguration()
 
-		cell.tintColor = UIColor.black
 		cell.selectionStyle = .none
 
 		contentConfiguration.image = UIImage(systemName: item.type.rawValue)
