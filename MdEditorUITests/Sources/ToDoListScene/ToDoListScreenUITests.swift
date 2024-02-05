@@ -86,5 +86,5 @@ final class ToDoListScreenUITests: XCTestCase {
 //		let screen = ToDoListScreenObject(app: app)
 //		screen
 //			.toggleTaskCompletion(indexPath: IndexPath(row: 1, section: 0))
-	  }
+//	}
 }

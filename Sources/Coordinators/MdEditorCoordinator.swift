@@ -49,7 +49,7 @@ private extension MdEditorCoordinator {
 
 		coordinator.finishFlow = { [weak self, weak coordinator] url in
 			let fileURL = url // url открываемого файла
-			self?.showEditorStartScreen()
+			self?.showHomeScreen()
 			coordinator.map { self?.removeDependency($0) }
 		}
 
