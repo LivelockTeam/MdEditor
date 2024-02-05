@@ -55,6 +55,16 @@ final class HomeInteractor: IHomeInteractor {
 
 	func didMenuPointSelected(request: HomeModel.Request.MenuPointSelected) {
 		#warning("TODO: Обработать нажатие на кнопку меню")
+		switch request.indexPath.row {
+		case 0:
+			print("call createNewDocument func")
+		case 1:
+			print("call OpenDocument func")
+		case 2:
+			print("call showAbout func")
+		default:
+			print("unknown cell \(request.indexPath)")
+		}
 	}
 
 	func didDocumentSelected(request: HomeModel.Request.DocumentSelected) {
