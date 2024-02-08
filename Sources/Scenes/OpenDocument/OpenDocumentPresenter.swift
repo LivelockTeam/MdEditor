@@ -30,28 +30,6 @@ final class OpenDocumentPresenter: IOpenDocumentPresenter {
 	// MARK: - Public methods
 
 	func present(response: OpenDocumentModel.Response) {
-//		// TEST DATA ↓
-//		let viewModel = OpenDocumentModel.ViewModel(
-//			items: [
-//				OpenDocumentModel.ViewModel.Item(
-//					type: OpenDocumentModel.ViewModel.ItemType.folder,
-//					title: "Test1",
-//					subTitle: "test1"
-//				),
-//				OpenDocumentModel.ViewModel.Item(
-//					type: OpenDocumentModel.ViewModel.ItemType.folder,
-//					title: "Test2",
-//					subTitle: "test2"
-//				),
-//				OpenDocumentModel.ViewModel.Item(
-//					type: OpenDocumentModel.ViewModel.ItemType.file,
-//					title: "Test3",
-//					subTitle: "test3"
-//				)
-//			]
-//		)
-//		// TEST DATA ↑
-
 		let viewModel = OpenDocumentModel.ViewModel(items: itemParser(files: response.items))
 		viewController.render(viewModel: viewModel)
 	}
@@ -65,7 +43,7 @@ final class OpenDocumentPresenter: IOpenDocumentPresenter {
 			let item = OpenDocumentModel.ViewModel.Item(
 				type: type,
 				title: file.name,
-				subTitle: file.getFormattedAttributes(), 
+				subTitle: file.getFormattedAttributes(),
 				path: file.path
 			)
 			items.append(item)

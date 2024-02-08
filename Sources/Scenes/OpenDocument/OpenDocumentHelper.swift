@@ -103,7 +103,7 @@ class FileExplorer {
 
 			let file = File()
 			file.name = name
-			file.path = atPath
+			file.path = atPath + "/" + name
 			if let type = attr[FileAttributeKey.type] as? FileAttributeType {
 				file.isDir = type == FileAttributeType.typeDirectory
 			}

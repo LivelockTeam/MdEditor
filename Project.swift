@@ -41,7 +41,7 @@ let mainTarget = Target(
 	bundleId: ProjectSettings.bundleId,
 	infoPlist: "Info.plist",
 	sources: ["Sources/**", "Shared/**"],
-	resources: ["Resources/**"],
+	resources: ["Resources/**", .folderReference(path: "Documents")],
 	scripts: scripts,
 	dependencies: [
 		.package(product: "TaskManagerPackage"),
