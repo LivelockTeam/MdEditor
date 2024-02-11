@@ -15,14 +15,14 @@ final class OpenDocumentAssembler {
 	/// - Returns: View отображающего список файлов и папок
 	func assembly(
 		screenTitle: String,
-		paths: [String],
+		folders: [Folder],
 		openDocumentResultClosure: OpenDocumentResultClosure?
 	) -> OpenDocumentViewController {
 		let viewController = OpenDocumentViewController(screenTitle: screenTitle)
 		let presenter = OpenDocumentPresenter(
 			viewController: viewController
 		)
-		let worker = OpenDocumentWorker(paths: paths)
+		let worker = OpenDocumentWorker(folders: folders)
 		let interactor = OpenDocumentInteractor(
 			presenter: presenter,
 			worker: worker,

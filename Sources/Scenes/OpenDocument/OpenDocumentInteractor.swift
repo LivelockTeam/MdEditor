@@ -13,7 +13,7 @@ protocol IOpenDocumentInteractor {
 	func didItemSelected(request: OpenDocumentModel.Request)
 }
 
-typealias OpenDocumentResultClosure = (ItemType) -> Void
+typealias OpenDocumentResultClosure = (IFolderItem) -> Void
 
 final class OpenDocumentInteractor: IOpenDocumentInteractor {
 
@@ -40,34 +40,14 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 	/// Событие на предоставление информации для списка папок и файлов.
 	func fetchData() {
 		let items = worker.getFoldersAndFiles()
-		let response = OpenDocumentModel.Response(items: items)
+		let response = OpenDocumentModel.Response(folders: items.folders, files: items.files)
 		presenter.present(response: response)
 	}
 
 	/// Событие, что папка или файл были выбраны.
 	/// - Parameter request: Запрос, содержащий информацию о выбранном элементе.
 	func didItemSelected(request: OpenDocumentModel.Request) {
-		var item: ItemType
-		switch request.type {
-		case .folder:
-			item = .folder(ItemType.Folder(title: request.title, path: request.path))
-		case .file:
-			item = .file(ItemType.File(path: request.path))
-		}
+		let item = worker.getItem(byIndex: request.index)
 		openDocumentResultClosure?(item)
-	}
-}
-
-enum ItemType {
-	case folder(Folder)
-	case file(File)
-
-	struct Folder {
-		let title: String
-		let path: String
-	}
-
-	struct File {
-		let path: String
 	}
 }

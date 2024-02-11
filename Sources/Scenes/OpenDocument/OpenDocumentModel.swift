@@ -11,31 +11,24 @@ import Foundation
 enum OpenDocumentModel {
 
 	struct Request {
-		let type: ItemType
-		let title: String
-		let path: String
-
-		enum ItemType {
-			case folder
-			case file
-		}
+		let index: IndexPath
 	}
 
 	struct Response {
-		let items: [File]
+		let folders: [Folder]
+		let files: [File]
 	}
 
 	struct ViewModel {
 		let items: [Item]
 
 		struct Item {
-			let type: ItemType
+			let icon: IconType
 			let title: String
 			let subTitle: String
-			let path: String
 		}
 
-		enum ItemType: String {
+		enum IconType: String {
 			case folder = "folder"
 			case file = "doc.text"
 		}
