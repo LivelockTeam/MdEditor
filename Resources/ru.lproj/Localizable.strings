@@ -26,3 +26,5 @@
 "Home.NewDocument" = "Новый документ";
 "Home.OpenDocument" = "Открыть документ";
 "Home.About" = "О приложении";
+
+"OpenDocument.title" = "Открыть документ";

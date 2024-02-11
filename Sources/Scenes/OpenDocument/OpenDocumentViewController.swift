@@ -69,21 +69,7 @@ extension OpenDocumentViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let item = viewModel.items[indexPath.row]
-
-		var type = OpenDocumentModel.Request.ItemType.file
-		switch item.type {
-		case .folder:
-			type = .folder
-		case .file:
-			type = .file
-		}
-
-		let request = OpenDocumentModel.Request(
-			type: type,
-			title: item.title,
-			path: item.path
-		)
+		let request = OpenDocumentModel.Request(index: indexPath)
 		interactor?.didItemSelected(request: request)
 	}
 }
@@ -104,7 +90,7 @@ private extension OpenDocumentViewController {
 
 		cell.selectionStyle = .none
 
-		contentConfiguration.image = UIImage(systemName: item.type.rawValue)
+		contentConfiguration.image = UIImage(systemName: item.icon.rawValue)
 		contentConfiguration.text = item.title
 		contentConfiguration.secondaryText = item.subTitle
 

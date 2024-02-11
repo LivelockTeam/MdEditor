@@ -40,14 +40,13 @@ private extension MdEditorCoordinator {
 	}
 
 	func showOpenDocument() {
-		#warning("TODO: Переход на окно с открытием документа (по id или другому параметру?)")
 
 		// Запуск OpenDocument Flow
 		let coordinator = OpenDocumentCoordinator(navigationController: navigationController)
 		addDependency(coordinator)
 
 		coordinator.finishFlow = { [weak self, weak coordinator] url in
-			_ = url // url открываемого файла
+			print(url) // url открываемого файла
 			self?.showHomeScreen()
 			coordinator.map { self?.removeDependency($0) }
 		}

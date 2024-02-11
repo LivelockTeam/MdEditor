@@ -26,3 +26,5 @@
 "Home.NewDocument" = "New";
 "Home.OpenDocument" = "Open";
 "Home.About" = "About";
+
+"OpenDocument.title" = "Open document";

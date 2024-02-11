@@ -37,33 +37,45 @@ final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
 	}
 
 	func showOpenDocumentScene() {
-		let screenTitle = "Open document"
-		let paths = [
-			Bundle.main.resourcePath! + "/Documents" // swiftlint:disable:this force_unwrapping
-//			FileManager.default.currentDirectoryPath
+		let screenTitle = L10n.OpenDocument.title
+		let sorces = [
+			("Documents", Bundle.main.resourcePath!) // swiftlint:disable:this force_unwrapping
+//			("", FileManager.default.currentDirectoryPath)
 		]
+		let folders = getFoldersFrom(sorces: sorces)
 
-		let viewController = showOpenDocumentScreen(screenTitle: screenTitle, paths: paths)
+		let viewController = showOpenDocumentScreen(screenTitle: screenTitle, folders: folders)
 		self.navigationController.setViewControllers([viewController], animated: true)
 	}
 
-	private func showOpenDocumentScreen(screenTitle: String, paths: [String]) -> OpenDocumentViewController {
+	private func showOpenDocumentScreen(screenTitle: String, folders: [Folder]) -> OpenDocumentViewController {
 		let viewController = OpenDocumentAssembler().assembly(
 			screenTitle: screenTitle,
-			paths: paths
-		) { [weak self] itemType in
-			switch itemType {
-			case .file(let file):
-				self?.finishFlow?(URL(fileURLWithPath: file.path))
-			case .folder(let folder):
+			folders: folders
+		) { [weak self] item in
+			if let folder = item as? Folder {
 				guard let viewController = self?.showOpenDocumentScreen(
-					screenTitle: folder.title,
-					paths: [folder.path]
+					screenTitle: folder.name,
+					folders: [folder]
 				) else { return }
 				self?.navigationController.pushViewController(viewController, animated: true)
+			} else {
+				self?.finishFlow?(URL(fileURLWithPath: item.path))
 			}
 		}
 
 		return viewController
+	}
+
+	private func getFoldersFrom(sorces: [(String, String)]) -> [Folder] {
+		var folders: [Folder] = []
+
+		for sorce in sorces {
+			if let folder = Folder.getFolder(withName: sorce.0, atFolderPath: sorce.1) {
+				folders.append(folder)
+			}
+		}
+
+		return folders
 	}
 }

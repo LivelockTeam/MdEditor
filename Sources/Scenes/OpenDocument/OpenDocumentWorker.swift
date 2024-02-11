@@ -9,25 +9,41 @@
 import Foundation
 
 protocol IOpenDocumentWorker {
-	func getFoldersAndFiles() -> [File]
+	func getFoldersAndFiles() -> (folders: [Folder], files: [File])
+	func getItem(byIndex index: IndexPath) -> IFolderItem
 }
 
 final class OpenDocumentWorker: IOpenDocumentWorker {
 
+	// MARK: - Dependencies
+
+	private var folderExplorer: FolderExplorer {
+		FolderExplorer(folders: folders)
+	}
+
 	// MARK: - Private properties
 
-	private var paths: [String]
+	private var folders: [Folder]
 
 	// MARK: - Initialization
 
-	internal init(paths: [String]) {
-		self.paths = paths
+	init(folders: [Folder]) {
+		self.folders = folders
 	}
 
 	// MARK: - Public methods
 
-	func getFoldersAndFiles() -> [File] {
-		let fileExplorer = FileExplorer()
-		return fileExplorer.getItems(paths: paths)
+	func getFoldersAndFiles() -> (folders: [Folder], files: [File]) {
+		folderExplorer.getOrderedFoldersAndFiles()
+	}
+
+	func getItem(byIndex index: IndexPath) -> IFolderItem {
+		var allItems: [IFolderItem] = []
+		let foldersAndFiles = getFoldersAndFiles()
+
+		allItems += foldersAndFiles.folders
+		allItems += foldersAndFiles.files
+
+		return allItems[index.row]
 	}
 }
