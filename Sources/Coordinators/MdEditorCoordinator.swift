@@ -31,7 +31,13 @@ final class MdEditorCoordinator: BaseCoordinator {
 
 private extension MdEditorCoordinator {
 	func showHomeScreen() {
-		let viewController = HomeAssembler.assembly()
+		
+		#warning("Временный плохой код, чтоб заработали кнопки меню")
+		let viewController = HomeAssembler.assembly() { [weak self] index in
+			if index.row == 1 {
+				self?.showOpenDocument()
+			}
+		}
 		self.navigationController.setViewControllers([viewController], animated: true)
 	}
 

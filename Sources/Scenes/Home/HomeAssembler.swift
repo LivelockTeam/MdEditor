@@ -11,10 +11,10 @@ import Foundation
 enum HomeAssembler {
 	/// Сборка главного экрана MdEditor'a
 	/// - Returns: вью
-	static func assembly() -> HomeViewController {
+	static func assembly(menuPointSelectedClosure: ((IndexPath) -> Void)?) -> HomeViewController {
 		let viewController = HomeViewController()
 		let presenter = HomePresenter(viewController: viewController)
-		let interactor = HomeInteractor(presenter: presenter)
+		let interactor = HomeInteractor(presenter: presenter, menuPointSelectedClosure: menuPointSelectedClosure)
 		viewController.interactor = interactor
 		return viewController
 	}

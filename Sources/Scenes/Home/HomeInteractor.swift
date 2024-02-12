@@ -29,6 +29,9 @@ final class HomeInteractor: IHomeInteractor {
 
 	private var presenter: IHomePresenter?
 
+	#warning("Временный плохой код, чтоб заработали кнопки меню")
+	private var menuPointSelectedClosure: ((IndexPath) -> Void)? // Временный код
+
 	#warning("TODO: Создать менюбилдер и убрать хардкод")
 	#warning("TODO: Подключить файловый менеджер, чтобы можно было подгружать файлы из файловой системы")
 	private let menu: [Menu] = [.new, .open, .about]
@@ -42,8 +45,9 @@ final class HomeInteractor: IHomeInteractor {
 
 	// MARK: - Init
 
-	init(presenter: IHomePresenter) {
+	init(presenter: IHomePresenter, menuPointSelectedClosure: ((IndexPath) -> Void)?) {
 		self.presenter = presenter
+		self.menuPointSelectedClosure = menuPointSelectedClosure // Временный код
 	}
 
 	// MARK: - Public methods
@@ -59,7 +63,7 @@ final class HomeInteractor: IHomeInteractor {
 		case 0:
 			print("call createNewDocument func")
 		case 1:
-			print("call OpenDocument func")
+			menuPointSelectedClosure?(request.indexPath) // Временный код
 		case 2:
 			print("call showAbout func")
 		default:
