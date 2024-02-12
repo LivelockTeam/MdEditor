@@ -45,10 +45,15 @@ private extension MdEditorCoordinator {
 		let coordinator = OpenDocumentCoordinator(navigationController: navigationController)
 		addDependency(coordinator)
 
-		coordinator.finishFlow = { [weak self, weak coordinator] url in
-			print(url) // url открываемого файла
-			self?.showHomeScreen()
-			coordinator.map { self?.removeDependency($0) }
+		coordinator.finishFlow = { [weak self, weak coordinator] sendedUrl in
+			if let url = sendedUrl {
+				_ = url // URL выбранного файла
+				self?.showHomeScreen()
+				coordinator.map { self?.removeDependency($0) }
+			} else {
+				self?.showHomeScreen()
+				coordinator.map { self?.removeDependency($0) }
+			}
 		}
 
 		coordinator.start()

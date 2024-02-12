@@ -53,6 +53,15 @@ final class OpenDocumentViewController: UITableViewController {
 	}
 }
 
+// MARK: - Actions
+
+private extension OpenDocumentViewController {
+	@objc
+	func closeTapped() {
+		interactor?.closeScene()
+	}
+}
+
 // MARK: - UITableView
 
 extension OpenDocumentViewController {
@@ -83,6 +92,12 @@ private extension OpenDocumentViewController {
 		title = screenTitle
 		navigationController?.navigationBar.prefersLargeTitles = false
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			barButtonSystemItem: .close,
+			target: self,
+			action: #selector(closeTapped)
+		)
 	}
 
 	func configureCell(_ cell: UITableViewCell, with item: OpenDocumentModel.ViewModel.Item) {

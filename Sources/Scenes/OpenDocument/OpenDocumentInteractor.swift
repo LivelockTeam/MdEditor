@@ -10,10 +10,11 @@ import Foundation
 
 protocol IOpenDocumentInteractor {
 	func fetchData()
+	func closeScene()
 	func didItemSelected(request: OpenDocumentModel.Request)
 }
 
-typealias OpenDocumentResultClosure = (IFolderItem) -> Void
+typealias OpenDocumentResultClosure = (IFolderItem?) -> Void
 
 final class OpenDocumentInteractor: IOpenDocumentInteractor {
 
@@ -42,6 +43,11 @@ final class OpenDocumentInteractor: IOpenDocumentInteractor {
 		let items = worker.getFoldersAndFiles()
 		let response = OpenDocumentModel.Response(folders: items.folders, files: items.files)
 		presenter.present(response: response)
+	}
+
+	/// Событие на закрытие экрана
+	func closeScene() {
+		openDocumentResultClosure?(nil)
 	}
 
 	/// Событие, что папка или файл были выбраны.

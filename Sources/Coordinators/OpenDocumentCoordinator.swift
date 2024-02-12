@@ -11,7 +11,7 @@ import UIKit
 protocol IOpenDocumentCoordinator: ICoordinator {
 
 	/// Метод для завершении сценария
-	var finishFlow: ((URL) -> Void)? { get set }
+	var finishFlow: ((URL?) -> Void)? { get set }
 }
 
 final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
@@ -22,7 +22,7 @@ final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
 
 	// MARK: - Internal properties
 
-	var finishFlow: ((URL) -> Void)?
+	var finishFlow: ((URL?) -> Void)?
 
 	// MARK: - Initialization
 
@@ -52,15 +52,19 @@ final class OpenDocumentCoordinator: IOpenDocumentCoordinator {
 		let viewController = OpenDocumentAssembler().assembly(
 			screenTitle: screenTitle,
 			folders: folders
-		) { [weak self] item in
-			if let folder = item as? Folder {
-				guard let viewController = self?.showOpenDocumentScreen(
-					screenTitle: folder.name,
-					folders: [folder]
-				) else { return }
-				self?.navigationController.pushViewController(viewController, animated: true)
+		) { [weak self] sendedItem in
+			if let item = sendedItem {
+				if let folder = item as? Folder {
+					guard let viewController = self?.showOpenDocumentScreen(
+						screenTitle: folder.name,
+						folders: [folder]
+					) else { return }
+					self?.navigationController.pushViewController(viewController, animated: true)
+				} else {
+					self?.finishFlow?(URL(fileURLWithPath: item.path))
+				}
 			} else {
-				self?.finishFlow?(URL(fileURLWithPath: item.path))
+				self?.finishFlow?(nil)
 			}
 		}
 
