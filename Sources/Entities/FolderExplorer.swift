@@ -26,6 +26,8 @@ final class FolderExplorer {
 
 	// MARK: - Public methods
 
+	/// Получить экземпляры класса File и Folder на основании объектов в папке
+	/// - Returns: кортеж из массивов объектов типа File и объектов типа Folder
 	func getOrderedFoldersAndFiles() -> (folders: [Folder], files: [File]) {
 		var orderedResult: (folders: [Folder], files: [File]) = ([], [])
 		var resultFolders: [Folder] = []

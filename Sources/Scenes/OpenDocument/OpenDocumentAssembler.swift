@@ -11,8 +11,8 @@ import Foundation
 final class OpenDocumentAssembler {
 
 	/// Сборка модуля авторизации
-	/// - Parameter openDocumentResultClosure: замыкание возвращающее URL открываемого документа
-	/// - Returns: View отображающего список файлов и папок
+	/// - Parameter openDocumentResultClosure: замыкание возвращающее выбранный объект из списка файлов и папок
+	/// - Returns: view отображающее список файлов и папок
 	func assembly(
 		screenTitle: String,
 		folders: [Folder],

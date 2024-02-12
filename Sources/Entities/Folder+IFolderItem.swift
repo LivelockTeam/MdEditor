@@ -40,6 +40,10 @@ final class Folder: IFolderItem {
 
 	// MARK: - Static methods
 
+	/// Получить экземпляр класса Folder на основании объекта в папке
+	/// - Parameter withName: имя объекта
+	/// - Parameter atFolderPath: путь папки, содержащей объект
+	/// - Returns: объект с опциональным типом Folder
 	static func getFolder(withName name: String, atFolderPath folderPath: String) -> Folder? {
 		let fileManager = FileManager.default
 

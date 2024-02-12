@@ -39,6 +39,10 @@ final class File: IFolderItem {
 
 	// MARK: - Static methods
 
+	/// Получить экземпляр класса File на основании объекта в папке
+	/// - Parameter withName: имя объекта
+	/// - Parameter atFolderPath: путь папки, содержащей объект
+	/// - Returns: объект с опциональным типом File
 	static func getFile(withName name: String, atFolderPath folderPath: String) -> File? {
 		let fileManager = FileManager.default
 
@@ -70,6 +74,8 @@ final class File: IFolderItem {
 
 	// MARK: - Public methods
 
+	/// Получить форматированное отображения размера экземпляра класса File
+	/// - Returns: форматированное отображение
 	func getFormattedSize() -> String {
 		var convertedValue = size
 		var multiplyFactor = 0
@@ -83,6 +89,8 @@ final class File: IFolderItem {
 		return String(format: "%4.2f %@", convertedValue, tokens[multiplyFactor])
 	}
 
+	/// Получить текст из содержания экземпляра класса File
+	/// - Returns: текст из объекта с типом File
 	func loadFileBody() -> String {
 		var text = ""
 

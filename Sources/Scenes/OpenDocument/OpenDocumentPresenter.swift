@@ -29,12 +29,15 @@ final class OpenDocumentPresenter: IOpenDocumentPresenter {
 
 	// MARK: - Public methods
 
+	/// Отображение экрана со списком папок и файлов
+	/// - Parameter response: Подготовленные к отображению данные
 	func present(response: OpenDocumentModel.Response) {
 		let viewModel = OpenDocumentModel.ViewModel(items: itemParser(folderItems: response))
 		viewController.render(viewModel: viewModel)
 	}
 
 	// MARK: - Private methods
+
 	private func itemParser(folderItems: OpenDocumentModel.Response) -> [OpenDocumentModel.ViewModel.Item] {
 		var items: [OpenDocumentModel.ViewModel.Item] = []
 
